@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import MainContent from './mainContent';
+import MainContent from './MainContent';
 import Editor from './Editor';
 import Features from './Features';
 
@@ -10,27 +10,43 @@ function MainPage() {
       sx={{ 
         flexGrow: 1, 
         bgcolor: '#1C1B23',
-        padding: '24px',
         display: 'flex', 
         flexDirection: 'column', 
-        justifyContent: 'center', // Centers the content vertically
-        minHeight: '100vh', // Minimum height to fill the viewport
+        justifyContent: 'center',
+        minHeight: '100vh',
+        position: 'relative', // Needed for absolute positioning of the image
       }}
     >
-      <Grid container spacing={2
-        } justifyContent="center" sx={{ maxWidth: '100%' }}>
+      {/* Main content and the image */}
+      <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: '100%', position: 'relative', padding:'0px 200px 50px 200px',}}>
+        {/* Main content */}
         <Grid item xs={12}>
-        <MainContent />
+          <MainContent />
         </Grid>
         <Grid item xs={12}>
-        <Editor />
+          <Editor />
         </Grid>
         <Grid item xs={12}>
-        <Features />
+          <Features />
         </Grid>
-      </Grid>
-    </Box>
+
+        {/* Background image */}
+        <Box
+          component="img"
+          sx={{
+            position: 'absolute',
+            right: 0, // Align to the right
+            top: 0,
+
+            objectFit: 'cover',
+            zIndex: 1, // Place image on top of the background but below the content
+          }}
+          src="/background.svg" // Replace with your image path
+          alt="Background Image"
+          />
+        </Grid>
+      </Box>
 );
 }
 
-export default MainPage;
+export default MainPage;      

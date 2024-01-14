@@ -3,7 +3,7 @@ import { Typography, Box, Grid, Button } from '@mui/material';
 
 function MainContent() {
   return (
-    <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+    <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh', position: 'relative', zIndex: 2 }}>
       <Grid item xs={12}>
         <Typography
           variant="h1"
