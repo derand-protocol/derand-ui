@@ -14,39 +14,38 @@ function MainPage() {
         flexDirection: 'column', 
         justifyContent: 'center',
         minHeight: '100vh',
-        position: 'relative', // Needed for absolute positioning of the image
-      }}
-    >
-      {/* Main content and the image */}
-      <Grid container spacing={2} justifyContent="center" sx={{ maxWidth: '100%', position: 'relative', padding:'0px 200px 50px 200px',}}>
+        position: 'relative',
+      }}>
+      <Grid container spacing={2} justifyContent="center" sx={{ 
+        maxWidth: '100%', 
+        position: 'relative', 
+        padding: { xs: '50px', sm: '50px 50px 50px 50px', md: '0px 200px 100px 200px' },
+        }}>
         {/* Main content */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <MainContent />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Editor />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Features />
         </Grid>
+          {/* Background image */}
+          <Box
+            component="img"
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: 0,
+              objectFit: 'cover',
+              zIndex: 1,
+            }}
+            src="/backgroundTop.svg"
+            alt="Background Image"/>
+      </Grid>
+    </Box>
+  );
+    }
 
-        {/* Background image */}
-        <Box
-          component="img"
-          sx={{
-            position: 'absolute',
-            right: 0, // Align to the right
-            top: 0,
-
-            objectFit: 'cover',
-            zIndex: 1, // Place image on top of the background but below the content
-          }}
-          src="/backgroundTop.svg" // Replace with your image path
-          alt="Background Image"
-          />
-        </Grid>
-      </Box>
-);
-}
-
-export default MainPage;      
+export default MainPage;    

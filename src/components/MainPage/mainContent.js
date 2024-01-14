@@ -3,15 +3,15 @@ import { Typography, Box, Grid, Button } from '@mui/material';
 
 function MainContent() {
   return (
-    <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh', position: 'relative', zIndex: 2 }}>
-      <Grid item xs={12}>
+    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', position: 'relative', zIndex: 2 }}>
+      <Grid item xs={12} sx={{ px: { xs: 2, md: 0 } }}> {/* Responsive padding */}
         <Typography
           variant="h1"
           sx={{
-            fontWeight: 600, // Semi-bold
-            fontSize: '4rem',
+            fontWeight: 600,
+            fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' }, // Responsive font size
             textAlign: 'center',
-            color: 'white', // Text color set to white
+            color: 'white',
           }}
         >
           <Box component="span" sx={{
@@ -20,7 +20,7 @@ function MainContent() {
             WebkitTextFillColor: 'transparent',
             MozBackgroundClip: 'text',
             MozTextFillColor: 'transparent',
-            display: 'inline', // Ensure the box is inline with the surrounding text
+            display: 'inline',
           }}>
             Decentralized 
           </Box>{" "}
@@ -29,26 +29,25 @@ function MainContent() {
         <Typography
           variant="h6"
           sx={{
-            mt: 2, // Margin top for spacing
+            mt: { xs: 1, md: 2 }, // Responsive margin top
             fontWeight: 'normal',
-            fontSize: '1.375rem',
+            fontSize: { xs: '1rem', sm: '1.2rem',md: '1.375rem' }, // Responsive font size
             textAlign: 'center',
             color: 'white',
-          }}
-        >
-          DeRand leverages Muon Network's decentralized TSS network
-          to provide verifiable random numbers for smart contracts 
-          on any blockchain platform (EVM and non-EVM)
-        </Typography>
-        {/* Add the Button component */}
-        <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <Button variant="contained" sx={{backgroundImage: 'linear-gradient(180deg, #24232B, #393457)',color: 'white'}}>
-        Read The Docs
-        </Button>
-        </Box>
-      </Grid>
+            }}
+            >
+            DeRand leverages Muon Network's decentralized TSS network
+            to provide verifiable random numbers for smart contracts
+            on any blockchain platform (EVM and non-EVM)
+            </Typography>
+            <Box sx={{ mt: { xs: 2, md: 4 }, textAlign: 'center' }}> {/* Responsive margin top */}
+              <Button variant="contained" sx={{ backgroundImage: 'linear-gradient(180deg, #24232B, #393457)', color: 'white' }}>
+              Read The Docs
+              </Button>
+            </Box>
     </Grid>
-  );
+    </Grid>
+);
 }
-
+            
 export default MainContent;

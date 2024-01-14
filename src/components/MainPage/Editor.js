@@ -9,7 +9,7 @@ function Editor() {
         src="/Editor.png" // Replace with your image path
         alt="Descriptive Alt Text
 "
-style={{ maxWidth: '100%', height: 'auto' }}
+style={{ maxWidth: '100%', height: 'auto', paddingBottom:'40px'}}
 />
   {/* Button */}
   <Button 

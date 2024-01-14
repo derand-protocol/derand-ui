@@ -39,20 +39,20 @@ function Features() {
     ];
     
     return (
-    <Grid container justifyContent="center" spacing={2}>
-    {boxesContent.map((box, index) => (
-    <Grid item xs={12} sm={6} md={4} key={index}>
-    <Box sx={boxStyle}>
-    <Typography variant="h6" color="white" gutterBottom>
-    {box.title}
-    </Typography>
-    <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
-    {box.body}
-    </Typography>
-    </Box>
-    </Grid>
-    ))}
-    </Grid>
+      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop:'100px'}}>
+        {boxesContent.map((box, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Box sx={boxStyle}>
+        <Typography variant="h6" color="white" gutterBottom>
+        {box.title}
+        </Typography>
+        <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
+        {box.body}
+        </Typography>
+        </Box>
+        </Grid>
+        ))}
+      </Grid>
     );
     }
     
