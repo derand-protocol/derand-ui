@@ -2,7 +2,19 @@ import React from 'react';
 import { Grid, Box, Typography } from '@mui/material';
 
 function Features() {
-  // Define the content for each box
+  const boxStyle = {
+    height: 230,
+    borderRadius: '20px',
+    background: 'linear-gradient(45deg, #24232B, #16151D)',
+    border: '2px solid',
+    borderColor: 'linear-gradient(45deg, #F8F1FE 0%, #F8F2FD 100%, #F8F1FE 0%)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
+  };
+
   const boxesContent = [
     {
       title: 'Chain Independent',
@@ -24,49 +36,24 @@ function Features() {
       title: 'Easy to use',
       body: 'Smart contract libraries and the structure of the protocol are compatible with other VRF platforms. Requires minimal code changes for developers',
     },
-  ];
-
-  // Styles
-  const wrapperStyle = {
-    width: 349,
-    height: 234,
-    borderRadius: '20px',
-    background: 'linear-gradient(180deg, #F8F1FE 0%, #F8F2FD 100%, #F8F1FE 0%)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '.05px',
-  };
-
-  const boxStyle = {
-    width: 345,
-    height: 230,
-    borderRadius: '20px',
-    background: 'linear-gradient(180deg, #24232B, #16151D)',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    p: 2, // padding inside the box
-  };
-
-  return (
+    ];
+    
+    return (
     <Grid container justifyContent="center" spacing={2}>
-      {boxesContent.map((box, index) => (
-        <Grid item xs={12} sm={6} md={4} key={index}>
-          <Box sx={wrapperStyle}>
-            <Box sx={boxStyle}>
-              <Typography variant="h6" color="white">
-                {box.title}
-              </Typography>
-              <Typography variant="body2" color="rgba(255, 255, 255, 0.60)" textAlign="center">
-                {box.body}
-              </Typography>
-            </Box>
-          </Box>
-        </Grid>
-          ))}
+    {boxesContent.map((box, index) => (
+    <Grid item xs={12} sm={6} md={4} key={index}>
+    <Box sx={boxStyle}>
+    <Typography variant="h6" color="white" gutterBottom>
+    {box.title}
+    </Typography>
+    <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
+    {box.body}
+    </Typography>
+    </Box>
     </Grid>
-);
-}
-export default Features;
+    ))}
+    </Grid>
+    );
+    }
+    
+    export default Features;
