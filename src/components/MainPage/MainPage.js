@@ -41,7 +41,7 @@ function MainPage() {
             objectFit: 'cover',
             zIndex: 1, // Place image on top of the background but below the content
           }}
-          src="/background.svg" // Replace with your image path
+          src="/backgroundTop.svg" // Replace with your image path
           alt="Background Image"
           />
         </Grid>
