@@ -73,7 +73,7 @@ function Features() {
               }}>
                   {box.title}
                 </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.60)" style={{ width: '100%' }} className="body">
+                <Typography variant="body2" color="rgba(255, 255, 255, 0.60)" style={{ width: '100%' ,textAlign:'center'}} className="body">
                   {box.body}
                 </Typography>
               </ContentBox>
