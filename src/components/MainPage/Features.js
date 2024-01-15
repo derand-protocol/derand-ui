@@ -5,13 +5,13 @@ import { styled } from '@mui/system';
 // Custom styled Box with gradient border
 const GradientBorderBox = styled(Box)({
   height: '200px',
-  borderRadius: '22px', // slightly larger to accommodate border
-  background: 'linear-gradient(90deg, #F8F1FE 0%, #F8F2FD 100%, #F8F1FE 0%)',
+  borderRadius: '20px', // slightly larger to accommodate border
+  background: 'linear-gradient(130deg,#CDC8DA, #2F2F3F,#CDC8DA, #2F2F3F)',
   display: 'flex',
   justifyContent: 'center',
   //boxShadow: '0 0 0 2px', // Shadow offset
   alignItems: 'center',
-  padding:'16.5px .75px 16.7px .75px',
+  padding:'16.5px 1.5px 17px 1.5px',
 });
 
 // Box for content
