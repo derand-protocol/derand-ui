@@ -32,7 +32,7 @@ function MainContent() {
           sx={{
             mt: { xs: 1, md: 2 }, // Responsive margin top
             fontWeight: 'normal',
-            fontSize: { xs: '1rem', sm: '1.2rem',md: '1.375rem' }, // Responsive font size
+            fontSize: { xs: '.7rem', sm: '1rem',md: '1.375rem' }, // Responsive font size
             textAlign: 'center',
             color: '#9C9CA7',
           }}

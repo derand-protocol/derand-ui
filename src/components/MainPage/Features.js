@@ -66,7 +66,11 @@ function Features() {
           <Grid item xs={12} sm={6} md={4} key={index}>
             <GradientBorderBox>
               <ContentBox>
-                <Typography variant="h6" color="white" gutterBottom style={{ textAlign: 'center', width: '100%' }} className="title">
+                <Typography variant="h6" color="white" gutterBottom 
+                style={{ textAlign: 'center', width: '100%' }} className="title"
+                sx={{
+                fontSize: { xs:'1rem', sm: '1.25rem' }, // Adjust font size for different screen sizes 
+              }}>
                   {box.title}
                 </Typography>
                 <Typography variant="body2" color="rgba(255, 255, 255, 0.60)" style={{ width: '100%' }} className="body">
