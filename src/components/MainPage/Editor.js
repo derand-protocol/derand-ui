@@ -49,7 +49,7 @@ function Editor() {
               marginRight: '8px', // Adjust the margin between the icon and text
             },
           }}
-          href="https://github.com/derand-protocol/"
+          href="https://github.com/derand-protocol/derand-contracts/blob/main/contracts/examples/DeRandConsumerExample.sol"
           target="_blank"
         >
           <GitHubIcon /> Full Example on GitHub

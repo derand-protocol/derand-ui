@@ -31,7 +31,14 @@ function Navbar() {
     { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord'},
     { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>, name: 'Medium' },
     { icon: <LinkedInIcon style={{width:'24' ,height:'24'}} />, name: 'LinkedIn' },
-    { icon: <GitHubIcon style={{paddingRight:'30px',width:'24' ,height:'24'}} />, name: 'GitHub' },
+    { 
+      icon: (
+        <IconButton color="inherit" component="a" href="https://github.com/derand-protocol/" target="_blank" rel="noopener noreferrer" sx={{ width:'24' ,height:'24',color: 'white', '&:hover': { backgroundColor: 'transparent' } }}>
+          <GitHubIcon />
+        </IconButton>
+      ), 
+      name: 'GitHub' 
+    },
     
     
   ];
