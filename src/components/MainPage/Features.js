@@ -1,20 +1,34 @@
 import React from 'react';
 import { Grid, Box, Typography } from '@mui/material';
+import { styled } from '@mui/system';
+
+// Custom styled Box with gradient border
+const GradientBorderBox = styled(Box)({
+  height: '200px',
+  borderRadius: '22px', // slightly larger to accommodate border
+  background: 'linear-gradient(90deg, #F8F1FE 0%, #F8F2FD 100%, #F8F1FE 0%)',
+  display: 'flex',
+  justifyContent: 'center',
+  //boxShadow: '0 0 0 2px', // Shadow offset
+  alignItems: 'center',
+  padding:'16.5px .75px 16.7px .75px',
+});
+
+// Box for content
+// Box for content
+const ContentBox = styled(Box)({
+  borderRadius: '20px',
+  background: 'linear-gradient(45deg, #24232B, #16151D)',
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center', // Changed to center for equal spacing
+  alignItems: 'center',
+  padding: '16px 32px', // Reduced padding for less space between title and body
+  });
 
 function Features() {
-  const boxStyle = {
-    height: 230,
-    borderRadius: '20px',
-    background: 'linear-gradient(45deg, #24232B, #16151D)',
-    border: '2px solid',
-    borderColor: 'linear-gradient(45deg, #F8F1FE 0%, #F8F2FD 100%, #F8F1FE 0%)',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 2,
-  };
-
   const boxesContent = [
     {
       title: 'Chain Independent',
@@ -39,20 +53,23 @@ function Features() {
     ];
     
     return (
-      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop:'100px'}}>
+      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '100px' }}>
         {boxesContent.map((box, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Box sx={boxStyle}>
-        <Typography variant="h6" color="white" gutterBottom>
-        {box.title}
-        </Typography>
-        <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
-        {box.body}
-        </Typography>
-        </Box>
-        </Grid>
-        ))}
-      </Grid>
+            <GradientBorderBox>
+              <ContentBox>
+                <Typography variant="h6" color="white" gutterBottom style={{ textAlign:'center', width:'100%'}}>
+                  {box.title}
+                </Typography>
+                <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
+                  {box.body}
+                  </Typography>
+        </ContentBox>
+      </GradientBorderBox>
+    </Grid>
+  ))}
+</Grid>
+
     );
     }
     

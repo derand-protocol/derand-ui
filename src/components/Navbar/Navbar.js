@@ -41,7 +41,7 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-            <img src="/White.svg" alt="DeRand Logo" style={{ height: '50px' }} />
+            <img src="/White.svg" alt="DeRand Logo" style={{ height: '30px',padding:'20px' }} />
           </Box>
 
           {isMobile ? (

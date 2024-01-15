@@ -9,7 +9,7 @@ function MainPage() {
     <Box 
       sx={{ 
         flexGrow: 1, 
-        bgcolor: '#1C1B23',
+        background: 'linear-gradient(180deg,#1C1B23, #292A43, #1E1D28)',
         display: 'flex', 
         flexDirection: 'column', 
         justifyContent: 'center',
