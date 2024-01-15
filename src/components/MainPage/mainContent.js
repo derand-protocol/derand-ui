@@ -34,7 +34,7 @@ function MainContent() {
             fontWeight: 'normal',
             fontSize: { xs: '1rem', sm: '1.2rem',md: '1.375rem' }, // Responsive font size
             textAlign: 'center',
-            color: 'white',
+            color: '#9C9CA7',
           }}
         >
           DeRand leverages Muon Network's decentralized TSS network
@@ -42,12 +42,23 @@ function MainContent() {
           on any blockchain platform (EVM and non-EVM)
         </Typography>
         <Box sx={{ mt: { xs: 2, md: 4 }, textAlign: 'center' }}> {/* Responsive margin top */}
-          <Button variant="contained" sx={{ backgroundImage: 'linear-gradient(180deg, #24232B, #393457)', color: 'white', textTransform: 'none' }}>
-            Read The Docs{" "}
-            <KeyboardArrowRightIcon fontSize="small" style={{ color: '#81808B', marginRight: '-10px' }} />
-            <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#BFBEC5', marginRight: '-15px' }} />
-            <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
-          </Button>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundImage: 'linear-gradient(#403886, #332E5B)',
+            color: 'white',
+            textTransform: 'none',
+            //boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)', // Subtle shadow effect
+            ':hover': {
+              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)', // Slightly different gradient on hover
+            }
+          }}
+        >
+          Read The Docs{" "}
+          <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
+          <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
+          <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
+        </Button>
         </Box>
       </Grid>
     </Grid>

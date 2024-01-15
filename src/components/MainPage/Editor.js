@@ -35,7 +35,7 @@ function Editor() {
         variant="contained"
         color="primary"
         sx={{
-          backgroundImage: 'linear-gradient(180deg, #24232B, #393457)',
+          backgroundImage: 'linear-gradient(#403886, #332E5B)',
           color: 'white',
           textTransform: 'none',
           '& .MuiButton-label': {
