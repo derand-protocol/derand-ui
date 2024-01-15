@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Grid, Button } from '@mui/material';
+import { Typography, Box, Grid, Button, Link } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function MainContent() {
@@ -37,9 +37,22 @@ function MainContent() {
             color: '#9C9CA7',
           }}
         >
-          DeRand leverages Muon Network's decentralized TSS network
-          to provide verifiable random numbers for smart contracts
-          on any blockchain platform (EVM and non-EVM)
+          DeRand leverages 
+          <Link 
+            href="https://www.muon.net/" 
+            target="_blank" 
+            color="#9C9CA7"
+            sx={{ 
+              textDecoration: 'none',
+              '&:hover': {
+                textDecoration: 'underline', // Adds underline on hover
+                color: '#FFFFFF', // Changes color on hover (optional)
+              }
+            }}
+          >
+            {" Muon Network's"}
+          </Link>
+          {" decentralized TSS network to provide verifiable random numbers for smart contracts on any blockchain platform (EVM and non-EVM)"}
         </Typography>
         <Box sx={{ mt: { xs: 2, md: 4 }, textAlign: 'center' }}> {/* Responsive margin top */}
         <Button

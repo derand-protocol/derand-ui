@@ -3,8 +3,8 @@ import { Box, Typography, Link } from '@mui/material';
 
 function Footer() {
   return (
-        <Box
-        sx={{
+    <Box
+      sx={{
         display: 'flex',
         justifyContent: 'space-between', 
         alignItems: 'center',
@@ -14,13 +14,15 @@ function Footer() {
         color: 'white',
       }}
     >
-      {/* Left side - SVG Image */}
+      {/* Left side - SVG Image wrapped in Link */}
       <Box>
-        <img src='/pion-muon-logo.svg' alt="Logo" style={{ height: '20px' ,marginLeft:'20px'}} />
+        <Link href="https://www.muon.net/" target="_blank">
+          <img src='/pion-muon-logo.svg' alt="Logo" style={{ height: '20px', marginLeft:'20px'}} />
+        </Link>
       </Box>
 
       {/* Right side - Text Links */}
-      <Box sx={{ display: 'flex', alignItems: 'center' ,marginRight:'30px',flexDirection: { xs: 'column', sm: 'row' },alignItems: { xs: 'left', sm:'left' }}}>
+      <Box sx={{ display: 'flex', alignItems: 'center', marginRight:'30px', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'left', sm:'left' }}}>
         <Link href="#" color="inherit" sx={{ marginRight: 2 }}>
           <Typography variant="body2">Privacy Policy</Typography>
         </Link>
