@@ -26,6 +26,14 @@ const ContentBox = styled(Box)({
   justifyContent: 'center', // Changed to center for equal spacing
   alignItems: 'center',
   padding: '16px 32px', // Reduced padding for less space between title and body
+  '& .title': {
+    height: '65px', // Fixed height for the title
+  },
+  '& .body': {
+    height: '100px', // Fixed height for the body
+    overflow: 'auto', // Enable scroll for overflow
+    //textAlign: 'justify', // Justify text for cleaner appearance
+  }
   });
 
 function Features() {
@@ -53,24 +61,23 @@ function Features() {
     ];
     
     return (
-      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '100px' }}>
+      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '50px' }}>
         {boxesContent.map((box, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <GradientBorderBox>
               <ContentBox>
-                <Typography variant="h6" color="white" gutterBottom style={{ textAlign:'center', width:'100%'}}>
+                <Typography variant="h6" color="white" gutterBottom style={{ textAlign: 'center', width: '100%' }} className="title">
                   {box.title}
                 </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.60)">
+                <Typography variant="body2" color="rgba(255, 255, 255, 0.60)" style={{ width: '100%' }} className="body">
                   {box.body}
-                  </Typography>
-        </ContentBox>
-      </GradientBorderBox>
-    </Grid>
-  ))}
-</Grid>
-
+                </Typography>
+              </ContentBox>
+            </GradientBorderBox>
+          </Grid>
+        ))}
+      </Grid>
     );
-    }
-    
-    export default Features;
+  }
+  
+  export default Features;
