@@ -28,20 +28,20 @@ function Navbar() {
   };
 
   const socialMediaIcons = [
-    { icon:  <img src={DiscordIcon} alt="Discord" width={30} height={30}/>, name: 'Discord'},
-    { icon: <img src={MediumIcon} alt="Medium" width={30} height={30}/>, name: 'Medium' },
-    { icon: <LinkedInIcon style={{width:'35' ,height:'35'}} />, name: 'LinkedIn' },
-    { icon: <GitHubIcon style={{paddingRight:'30px',width:'35' ,height:'35'}} />, name: 'GitHub' },
+    { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord'},
+    { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>, name: 'Medium' },
+    { icon: <LinkedInIcon style={{width:'24' ,height:'24'}} />, name: 'LinkedIn' },
+    { icon: <GitHubIcon style={{paddingRight:'30px',width:'24' ,height:'24'}} />, name: 'GitHub' },
     
     
   ];
 
   return (
-    <AppBar position="static" sx={{ background: '#1C1B23', boxShadow: 'none' }}>
+    <AppBar position="fixed" sx={{ background: 'rgba(28, 27, 35, .98)', boxShadow: 'none' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px',padding:'30px' }} />
+            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px',paddingLeft:'30px',padding:'20px' }} />
           </Box>
 
           {isMobile ? (
