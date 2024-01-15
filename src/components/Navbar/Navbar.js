@@ -37,7 +37,7 @@ function Navbar() {
   ];
 
   return (
-    <AppBar position="fixed" sx={{ background: 'rgba(28, 27, 35, .98)', boxShadow: 'none' }}>
+    <AppBar position="fixed" sx={{ background: 'rgba(28, 27, 35, .98)', boxShadow: 'none'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
