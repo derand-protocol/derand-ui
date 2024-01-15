@@ -61,7 +61,7 @@ function Features() {
     ];
     
     return (
-      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '100px',paddingBottom:'100px' }}>
+      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '100px',paddingBottom:'100px' ,zIndex: 2 }}>
         {boxesContent.map((box, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <GradientBorderBox>

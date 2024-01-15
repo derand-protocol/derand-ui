@@ -28,10 +28,10 @@ function Navbar() {
   };
 
   const socialMediaIcons = [
-    { icon:  <img src={DiscordIcon} alt="Discord" width={25} height={25}/>, name: 'Discord'},
-    { icon: <img src={MediumIcon} alt="Medium" width={25} height={25}/>, name: 'Medium' },
-    { icon: <LinkedInIcon />, name: 'LinkedIn' },
-    { icon: <GitHubIcon />, name: 'GitHub' },
+    { icon:  <img src={DiscordIcon} alt="Discord" width={30} height={30}/>, name: 'Discord'},
+    { icon: <img src={MediumIcon} alt="Medium" width={30} height={30}/>, name: 'Medium' },
+    { icon: <LinkedInIcon style={{width:'35' ,height:'35'}} />, name: 'LinkedIn' },
+    { icon: <GitHubIcon style={{paddingRight:'30px',width:'35' ,height:'35'}} />, name: 'GitHub' },
     
     
   ];
@@ -41,7 +41,7 @@ function Navbar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-            <img src="/White.svg" alt="DeRand Logo" style={{ height: '30px',padding:'20px' }} />
+            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px',padding:'30px' }} />
           </Box>
 
           {isMobile ? (

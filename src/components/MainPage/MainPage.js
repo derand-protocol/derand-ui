@@ -31,21 +31,36 @@ function MainPage() {
         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Features />
         </Grid>
-          {/* Background image */}
-          <Box
-            component="img"
-            sx={{
-              position: 'absolute',
-              right: 0,
-              top: 0,
-              objectFit: 'cover',
-              zIndex: 1,
-            }}
-            src="/backgroundTop.svg"
-            alt="Background Image"/>
+
+        {/* Right Background image */}
+        <Box
+          component="img"
+          sx={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            objectFit: 'cover',
+            zIndex: 1,
+          }}
+          src="/backgroundTop.svg"
+          alt="Background Image"/>
+
+        {/* Left Background image */}
+        <Box
+          component="img"
+          sx={{
+            position: 'absolute',
+            left: 0,
+            top: '1600px',
+            objectFit: 'cover',
+            zIndex: 1,
+            width:'900px',
+          }}
+          src="/backgroundb.svg"
+          alt="Background Image"/>
       </Grid>
     </Box>
   );
-    }
+}
 
-export default MainPage;    
+export default MainPage;
