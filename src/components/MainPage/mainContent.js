@@ -10,7 +10,7 @@ function MainContent() {
           variant="h1"
           sx={{
             fontWeight: 600,
-            fontSize: { xs: '2.5rem', sm: '3rem', md: '4rem' }, // Responsive font size
+            fontSize: { xs: '1.5rem', sm: '2.5rem', md: '4rem' }, // Responsive font size
             textAlign: 'center',
             color: 'white',
           }}
