@@ -4,37 +4,53 @@ import { styled } from '@mui/system';
 
 // Custom styled Box with gradient border
 const GradientBorderBox = styled(Box)({
-  height: '200px',
-  borderRadius: '20px', // slightly larger to accommodate border
-  background: 'linear-gradient(130deg,#CDC8DA, #2F2F3F,#CDC8DA, #2F2F3F)',
+  height:'100%',
+  borderRadius: '16px', // slightly larger to accommodate border
+  background: `
+    linear-gradient(45deg, rgba(76,74,89,1) 40%, rgba(230,225,242,.3) 60%),
+    linear-gradient(130deg, rgba(230,225,242,.9) 40%, rgba(230,225,242,.6) 40%)`,
   display: 'flex',
   justifyContent: 'center',
-  //boxShadow: '0 0 0 2px', // Shadow offset
   alignItems: 'center',
-  padding:'16.5px 1.5px 17px 1.5px',
+  padding: '1px', // Thin padding to create the border effect
 });
-
 // Box for content
 // Box for content
-const ContentBox = styled(Box)({
-  borderRadius: '20px',
+const ContentBox = styled(Box)(({ theme }) => ({
+  borderRadius: '16px',
   background: 'linear-gradient(45deg, #24232B, #16151D)',
   width: '100%',
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
-  justifyContent: 'center', // Changed to center for equal spacing
+  padding: '32px',
+  [theme.breakpoints.down('sm')]: {
+    padding: '24px',
+  },
+  [theme.breakpoints.down('xs')]: {
+    padding: '16px',
+    
+  },
+  justifyContent: 'center',
   alignItems: 'center',
-  padding: '16px 32px', // Reduced padding for less space between title and body
   '& .title': {
-    height: '65px', // Fixed height for the title
+    height: '65px',
+    fontSize: '1.25rem',
+    marginBottom: '16px',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1rem'},
   },
   '& .body': {
-    height: '100px', // Fixed height for the body
-    overflow: 'auto', // Enable scroll for overflow
-    //textAlign: 'justify', // Justify text for cleaner appearance
+    fontSize: '1rem',
+    lineHeight: '24px',
+    textAlign: 'justify',
+    height: '100px',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '0.750rem',
+      lineHeight: '20px',
+    },
   }
-  });
+}));
 
 function Features() {
   const boxesContent = [
@@ -61,7 +77,17 @@ function Features() {
     ];
     
     return (
-      <Grid container justifyContent="center" spacing={2} alignItems="center" sx={{ width: '100%', margin: '0 auto', paddingTop: '100px',paddingBottom:'100px' ,zIndex: 2 }}>
+      <Grid container justifyContent="center" spacing={2} alignItems="center" 
+      sx={{ 
+        width: '100%', // Default to full width
+        maxWidth: { md: '80%' }, // 80% width on medium devices and up
+        margin: '0 auto', // Center the container
+        paddingTop:'40px',
+        paddingTop: {md:'100px'},
+        paddingBottom: {md:'100px'},
+        paddingBottom:'40px',
+        zIndex: 2 
+      }}>
         {boxesContent.map((box, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <GradientBorderBox>

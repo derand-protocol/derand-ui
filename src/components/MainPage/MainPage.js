@@ -11,24 +11,25 @@ function MainPage() {
         flexGrow: 1, 
         background: 'linear-gradient(180deg,#1C1B23, #292A43, #1E1D28)',
         display: 'flex', 
-        flexDirection: 'column', 
+        flexDirection: 'center', 
         justifyContent: 'center',
         minHeight: '100vh',
         position: 'relative',
+        overflowX: 'hidden',
       }}>
       <Grid container spacing={2} justifyContent="center" sx={{ 
         maxWidth: '100%', 
         position: 'relative', 
-        padding: { xs: '50px', sm: '50px 50px 50px 50px', md: '0px 200px 100px 200px' },
+        padding: { xs: '0px', sm: '0px', md: '0px' },
         }}>
         {/* Main content */}
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,padding:'24px'}}>
           <MainContent />
         </Grid>
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,padding:'24px'}}>
           <Editor />
         </Grid>
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,paddingRight:'24px' }}>
           <Features />
         </Grid>
 

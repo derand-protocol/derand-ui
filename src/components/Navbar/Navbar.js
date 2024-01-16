@@ -33,7 +33,7 @@ function Navbar() {
     { icon: <LinkedInIcon style={{width:'24' ,height:'24'}} />, name: 'LinkedIn' },
     { 
       icon: (
-        <IconButton color="inherit" component="a" href="https://github.com/derand-protocol/" target="_blank" rel="noopener noreferrer" sx={{ width:'24' ,height:'24',color: 'white', '&:hover': { backgroundColor: 'transparent' } }}>
+        <IconButton color="inherit" component="a" href="https://github.com/derand-protocol/" target="_blank" rel="noopener noreferrer" sx={{ width:'24' ,height:'24' }}>
           <GitHubIcon />
         </IconButton>
       ), 
@@ -44,7 +44,14 @@ function Navbar() {
   ];
 
   return (
-    <AppBar position="fixed" sx={{ background: 'rgba(28, 27, 35, .98)', boxShadow: 'none'}}>
+    <AppBar position="fixed" sx={{ 
+      background: 'rgba(28, 27, 35, .98)', 
+      boxShadow: 'none', 
+      left: 0, // Add this line
+      right: 0, // And this line
+      width: '100vw', // Make sure it spans the entire viewport width
+      overflowX: 'hidden' // Prevent horizontal scrolling
+    }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>

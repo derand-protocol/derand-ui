@@ -6,34 +6,41 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 // Custom styled Box for the image with gradient border
 const ImageBoxWithBorder = styled(Box)({
   position: 'relative',
-  display: 'inline-block', // Adjust as needed
-  '&::before': {
+  display: 'inline-block',
+  borderRadius: '5px', // Apply border-radius if needed
+  overflow: 'hidden', // This ensures the border applies closely to the image
+  '& img': {
+    display: 'block', // Remove any default spacing/margin around the image
+    width: '100%', // Sets the width to 100% of the parent container
+    height: 'auto', // Maintains aspect ratio
+    maxWidth: '100%', // Ensures the image doesn't exceed its natural size
+    maxHeight: '80vh', // Maximum height
+  },
+  '&::after': { // Using ::after to overlay the border on the left side of the image
     content: '""',
     position: 'absolute',
     top: 0,
-    bottom: 0,
     left: 0,
-    width: '5px', // Width of the gradient border
-    height: '99%', // Height of the gradient border
-    background: 'linear-gradient(180deg, #B267F3, #EA68AD, #FFA279)',
-    borderRadius: '5px',
+    width: '10px', // Width of the left border
+    height: '100%', // Height matches the image
+    background: 'linear-gradient(180deg, rgba(178,103,243,0.6), rgba(234,104,173,0.6), rgba(255,162,121,0.6))',
+    zIndex: 1, // Places the gradient above the image
   }
 });
 
 function Editor() {
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', paddingLeft: '24px' }}>
       <ImageBoxWithBorder>
         {/* Image */}
         <img
-          src="/Editor.png" 
+          src="/Editor.png"
           alt="Descriptive Alt Text"
-          style={{ maxWidth: '100%', height: 'auto' }}
         />
       </ImageBoxWithBorder>
 
       {/* Box to wrap the button for styling */}
-      <Box sx={{ paddingTop: '40px' }}>
+      <Box sx={{ paddingTop: '30px' }}>
         <Button
           variant="contained"
           color="primary"
