@@ -1,10 +1,23 @@
 import React from 'react';
-import { Typography, Box, Grid, Button, Link } from '@mui/material';
+import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function MainContent() {
-return (
-    <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: '100vh', position: 'relative', zIndex: 2 }}>
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  return (
+    <Grid 
+      container 
+      justifyContent="center" 
+      alignItems="center" 
+      sx={{ 
+        paddingTop:'100px',
+        minHeight: isDesktop ? '95vh' : 'auto', 
+        position: 'relative', 
+        zIndex: 2 
+      }}
+    >
       <Grid item xs={12} md={10} lg={10} sx={{ 
       display: 'flex', 
       flexDirection: 'column', 

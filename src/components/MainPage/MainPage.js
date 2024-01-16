@@ -1,10 +1,12 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useTheme, useMediaQuery }  from '@mui/material';
 import MainContent from './MainContent';
 import Editor from './Editor';
 import Features from './Features';
 
 function MainPage() {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   return (
     <Box 
       sx={{ 
@@ -16,6 +18,7 @@ function MainPage() {
         minHeight: '100vh',
         position: 'relative',
         overflowX: 'hidden',
+        paddingBottom:'40px'
       }}>
       <Grid container spacing={2} justifyContent="center" sx={{ 
         maxWidth: '100%', 
@@ -33,31 +36,33 @@ function MainPage() {
           <Features />
         </Grid>
 
-        {/* Right Background image */}
-        <Box
-          component="img"
-          sx={{
-            position: 'absolute',
-            right: 0,
-            top: 0,
-            objectFit: 'cover',
-            zIndex: 1,
-          }}
-          src="/backgroundTop.svg"
-          alt="Background Image"/>
+ {/* Right Background image for desktop */}
+ {isDesktop && (
+          <Box
+            component="img"
+            sx={{
+              position: 'absolute',
+              right: 0,
+              top: 200,
+              objectFit: 'cover',
+              zIndex: 1,
+            }}
+            src="/backgroundTop.svg"
+            alt="Background Image"/>
+        )}
 
-        {/* Left Background image */}
+        {/* Left Background image for all devices */}
         <Box
           component="img"
           sx={{
             position: 'absolute',
             left: 0,
-            top: '1600px',
+            top: isDesktop ? '1800px' : '0px',
             objectFit: 'cover',
             zIndex: 1,
-            width:'900px',
+            width: isDesktop ? '800px' : '500px',
           }}
-          src="/backgroundb.svg"
+          src={isDesktop ? "/backgroundb.svg" : "/backgroundTop.svg"}
           alt="Background Image"/>
       </Grid>
     </Box>

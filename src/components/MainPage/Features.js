@@ -20,7 +20,6 @@ const ContentBox = styled(Box)(({ theme }) => ({
   borderRadius: '16px',
   background: 'linear-gradient(45deg, #24232B, #16151D)',
   width: '100%',
-  height: '100%',
   display: 'flex',
   flexDirection: 'column',
   padding: '32px',
@@ -82,10 +81,6 @@ function Features() {
         width: '100%', // Default to full width
         maxWidth: { md: '80%' }, // 80% width on medium devices and up
         margin: '0 auto', // Center the container
-        paddingTop:'40px',
-        paddingTop: {md:'100px'},
-        paddingBottom: {md:'100px'},
-        paddingBottom:'40px',
         zIndex: 2 
       }}>
         {boxesContent.map((box, index) => (
