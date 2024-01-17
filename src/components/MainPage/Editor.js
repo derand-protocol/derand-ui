@@ -30,40 +30,40 @@ const ImageBoxWithBorder = styled(Box)({
 
 function Editor() {
   return (
-    <div style={{ textAlign: 'center', paddingLeft: '24px' }}>
-      <ImageBoxWithBorder>
-        {/* Image */}
-        <img
-          src="/Editor.png"
-          alt="Descriptive Alt Text"
-        />
-      </ImageBoxWithBorder>
-
-      {/* Box to wrap the button for styling */}
-      <Box sx={{ paddingTop: '30px' }}>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            backgroundImage: 'linear-gradient(#403886, #332E5B)',
-            color: 'white',
-            textTransform: 'none',
-            '& .MuiButton-label': {
-              display: 'flex',
-              alignItems: 'center',
-            },
-            '& .MuiSvgIcon-root': {
-              marginRight: '8px', // Adjust the margin between the icon and text
-            },
-          }}
-          href="https://github.com/derand-protocol/derand-contracts/blob/main/contracts/examples/DeRandConsumerExample.sol"
-          target="_blank"
-        >
-          <GitHubIcon /> Full Example on GitHub
-        </Button>
-      </Box>
-    </div>
-  );
+    <div style={{ textAlign: 'center', paddingLeft: '24px', position: 'relative', zIndex: 2 }}>
+      <
+ImageBoxWithBorder>
+{/* Image */}
+<img
+       src="/Editor.png"
+       alt="Descriptive Alt Text"
+     />
+</ImageBoxWithBorder>
+  {/* Box to wrap the button for styling */}
+  <Box sx={{ paddingTop: '30px' }}>
+    <Button
+      variant="contained"
+      color="primary"
+      sx={{
+        backgroundImage: 'linear-gradient(#403886, #332E5B)',
+        color: 'white',
+        textTransform: 'none',
+        '& .MuiButton-label': {
+          display: 'flex',
+          alignItems: 'center',
+        },
+        '& .MuiSvgIcon-root': {
+          marginRight: '8px', // Adjust the margin between the icon and text
+        },
+      }}
+      href="https://github.com/derand-protocol/derand-contracts/blob/main/contracts/examples/DeRandConsumerExample.sol"
+      target="_blank"
+    >
+      <GitHubIcon /> Full Example on GitHub
+    </Button>
+  </Box>
+</div>
+);
 }
 
 export default Editor;

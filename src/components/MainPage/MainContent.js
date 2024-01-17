@@ -4,7 +4,12 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function MainContent() {
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+
+  // Custom media query for 768x1024 resolution
+  const isTabletResolution = useMediaQuery('(min-width:768px) and (max-width:1024px) and (orientation: portrait), (min-width:768px) and (max-width:1024px) and (orientation: landscape)');
+
+  // Apply '100vh' for small and medium screens, and 'auto' for 768x1024 resolution
+  const minHeightStyle = isTabletResolution ? 'auto' : theme.breakpoints.up('sm') && theme.breakpoints.down('md') ? '100vh' : 'auto';
 
   return (
     <Grid 
@@ -12,8 +17,8 @@ function MainContent() {
       justifyContent="center" 
       alignItems="center" 
       sx={{ 
-        paddingTop:'100px',
-        minHeight: isDesktop ? '95vh' : 'auto', 
+        paddingTop: '100px',
+        minHeight: minHeightStyle,
         position: 'relative', 
         zIndex: 2 
       }}

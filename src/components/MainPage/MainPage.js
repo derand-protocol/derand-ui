@@ -7,7 +7,9 @@ import Features from './Features';
 function MainPage() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-  return (
+  const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
+
+return (
     <Box 
       sx={{ 
         flexGrow: 1, 
@@ -18,7 +20,7 @@ function MainPage() {
         minHeight: '100vh',
         position: 'relative',
         overflowX: 'hidden',
-        paddingBottom:'40px'
+        paddingBottom: '40px'
       }}>
       <Grid container spacing={2} justifyContent="center" sx={{ 
         maxWidth: '100%', 
@@ -26,7 +28,7 @@ function MainPage() {
         padding: { xs: '0px', sm: '0px', md: '0px' },
         }}>
         {/* Main content */}
-        <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,padding:'24px'}}>
+        <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,padding:'24px',paddingBottom:'50px'}}>
           <MainContent />
         </Grid>
         <Grid item xs={12} sx={{ display: 'grid', justifyContent: 'center' ,padding:'24px'}}>
@@ -52,18 +54,14 @@ function MainPage() {
         )}
 
         {/* Left Background image for all devices */}
-        <Box
-          component="img"
-          sx={{
-            position: 'absolute',
-            left: 0,
-            top: isDesktop ? '1800px' : '0px',
-            objectFit: 'cover',
-            zIndex: 1,
-            width: isDesktop ? '800px' : '500px',
-          }}
-          src={isDesktop ? "/backgroundb.svg" : "/backgroundTop.svg"}
-          alt="Background Image"/>
+        <Box component="img" sx={{
+          position: 'absolute',
+          left: 0,
+          top: isDesktop ? '1800px' : '200px',
+          objectFit: 'cover',
+          zIndex: 1, // Send it behind the content
+          width: isTabletOrLarger ? '850px' : '450px',
+        }} src={isDesktop ? "/backgroundb.svg" : "/backgroundTop.svg"} alt="Background Image" />
       </Grid>
     </Box>
   );
