@@ -53,6 +53,7 @@ function MainContent() {
           display: 'inline',
           }}
           >
+            
           <Box component="span" sx={{
           background: 'linear-gradient(45deg, #B267F3, #EA68AD, #FFA279)',
           WebkitBackgroundClip: 'text',
