@@ -54,8 +54,8 @@ const ContentBox = styled(Box)(({ theme }) => ({
 function Features() {
   const boxesContent = [
     {
-      title: 'Chain Independent',
-      body: 'DeRand protocol is chain-independent. It can be used on EVM and non-EVM, public or private blockchains.',
+      title: 'Chain-Agnostic',
+      body: 'DeRand is built on top of the Muon network, so it generates random seeds off-chain in a decentralized way using Muon’s TSS network. Therefore, it can be used on any EVM or Non-EVM blockchain',
     },
     {
       title: 'Decentralized & Censorship Resistant',
@@ -63,7 +63,7 @@ function Features() {
     },
     {
       title: 'Cost Efficient',
-      body: 'Pay only fees. No on-chain fees. Gas efficient.',
+      body: 'You only need to pay for the gas fee of the blockchain and the Muon network',
     },
     {
       title: 'Permissionless, Modular & Flexible',
@@ -71,7 +71,7 @@ function Features() {
     },
     {
       title: 'Easy to use',
-      body: 'Smart contract libraries and the structure of the protocol are compatible with other VRF platforms. Requires minimal code changes for developers',
+      body: 'Smart contract libraries and the protocol structure are compatible with other VRF platforms. Requires minimal code changes for developers',
     },
     ];
     
