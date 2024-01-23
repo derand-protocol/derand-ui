@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 function MainContent() {
   const theme = useTheme();
@@ -61,7 +62,7 @@ function MainContent() {
           MozBackgroundClip: 'text',
           MozTextFillColor: 'transparent',
           }}>
-          Decentralized, chain-agnostic,{" "}
+          Decentralized, chain-agnostic{" "}
           </Box>
           and public good Verifiable Random number generator
         </Typography>
@@ -79,42 +80,74 @@ function MainContent() {
             <Link
               href="https://www.muon.net/"
               target="_blank"
-              color="#6979F8"
+              color="#FEFEFE"
               sx={{
               textDecoration: 'none',
               '&:hover': {
               textDecoration: 'underline',
-              color: '#FFFFFF',
+              color: '#FEFEFE',
               }
               }}
               >
               Muon 
             </Link>{" "}
-          decentralized TSS network to provide verifiable random numbers on any EVM and non-EVM blockchain.
+              decentralized TSS network to provide verifiable random numbers on any EVM and non-EVM blockchain.
         </Typography>
-      {/* Button */}
-    <Box sx={{ mt: { xs: 2, md: 4 } }}>
-      <Button
+            {/* Button */}
+            {/* New Grid container for buttons */}
+        <Grid 
+          container 
+          spacing={2} 
+          justifyContent="center" 
+          sx={{ 
+            flexDirection: { xs: 'column', md: 'row' },
+            mt: { xs: 2, md: 4 }
+          }}
+        >
+        {/* Read The Docs Button */}
+        <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
           variant="contained"
           sx={{
-          backgroundImage: 'linear-gradient(#403886, #332E5B)',
-          color: 'white',
-          textTransform: 'none',
-          ':hover': {
-          backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
-          }
+            width: '200px', // Set a fixed width
+            backgroundImage: 'linear-gradient(#403886, #332E5B)',
+            color: '#FEFEFE',
+            textTransform: 'none',
+            ':hover': {
+              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
+            }
           }}
           >
-          Read The Docs{" "}
-          <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
-          <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
-          <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
-      </Button>
-    </Box>
-    </Box>
-    </Grid>
-    </Grid>
-);
+            Read The Docs{" "}
+            <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
+            <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
+            <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
+          </Button>
+        </Grid>
+
+        {/* Explore dApps Button */}
+        <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button
+          variant="contained"
+          sx={{
+            width: '200px', // Set the same fixed width
+            backgroundImage: 'linear-gradient(#403886, #332E5B)',
+            color: '#FEFEFE',
+            textTransform: 'none',
+            ':hover': {
+              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
+            }
+          }}
+        >
+          {/* <ExploreIcon fontSize="large" style={{ color: '#FEFEFE', marginRight: '10px'}} /> */}
+            Explore dApps{" "}
+        </Button>
+        </Grid>
+        </Grid>
+      </Box>
+      </Grid>
+      </Grid>
+  );
 }
 
 export default MainContent;

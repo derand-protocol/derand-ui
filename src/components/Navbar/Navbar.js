@@ -10,10 +10,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import DiscordIcon from '../../Icons/discord.svg';
-import MediumIcon from '../../Icons/medium.svg';   // Adjust the path as needed
 import useMediaQuery from '@mui/material/useMediaQuery';
+import TwitterIcon from '../../Icons/twitter.svg';
+import DiscordIcon from '../../Icons/discord.svg';
+import MediumIcon from '../../Icons/medium.svg'; 
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -30,17 +30,25 @@ function Navbar() {
   const socialMediaIcons = [
     { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord'},
     { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>, name: 'Medium' },
-    { icon: <LinkedInIcon style={{width:'24' ,height:'24'}} />, name: 'LinkedIn' },
     { 
-      icon: (
-        <IconButton color="inherit" component="a" href="https://github.com/derand-protocol/" target="_blank" rel="noopener noreferrer" sx={{ width:'24' ,height:'24' }}>
-          <GitHubIcon />
-        </IconButton>
-      ), 
-      name: 'GitHub' 
+      icon: <img src={TwitterIcon} alt="Twitter" 
+              style={{ 
+                width: 24, 
+                height: 24, 
+                backgroundColor: isMobile ? 'black' : 'transparent',
+                borderRadius:'20px',
+              }} 
+      />,
+      name: 'Twitter',
+      link: "https://twitter.com/DeRand_dev"
     },
     
-    
+    { 
+      icon: <GitHubIcon style={{ width: 24, height: 24 }} />, 
+      name: 'GitHub',
+      link: "https://github.com/derand-protocol/"
+    },
+    // ... other icons
   ];
 
   return (
@@ -83,14 +91,23 @@ function Navbar() {
             </>
           ) : (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              {socialMediaIcons.map((item, index) => (
-                <Tooltip title={item.name} key={index}>
-                  <IconButton color="inherit">
-                    {item.icon}
-                  </IconButton>
-                </Tooltip>
-              ))}
-            </Box>
+  {socialMediaIcons.map((item, index) => (
+    <Tooltip title={item.name} key={index}>
+      {item.link ? (
+        <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <IconButton color="inherit" sx={{ mx: 1 }}>
+            {item.icon}
+          </IconButton>
+        </a>
+      ) : (
+        <IconButton color="inherit" sx={{ mx: 1 }}>
+          {item.icon}
+        </IconButton>
+      )}
+    </Tooltip>
+  ))}
+</Box>
+
           )}
         </Toolbar>
       </Container>

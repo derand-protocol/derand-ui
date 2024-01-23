@@ -44,9 +44,11 @@ const ContentBox = styled(Box)(({ theme }) => ({
     lineHeight: '24px',
     textAlign: 'justify',
     height: '100px',
+    paddingBottom: '36px', // Add padding to the bottom
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.750rem',
       lineHeight: '20px',
+
     },
   }
 }));
@@ -87,7 +89,7 @@ function Features() {
           <Grid item xs={12} sm={6} md={4} key={index}>
             <GradientBorderBox>
               <ContentBox>
-                <Typography variant="h6" color="white" gutterBottom 
+                <Typography variant="h6" color="#FEFEFE" gutterBottom 
                 style={{ textAlign: 'center', width: '100%' }} className="title"
                 sx={{
                 fontSize: { xs:'1rem', sm: '1.25rem' }, // Adjust font size for different screen sizes 
