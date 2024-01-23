@@ -57,7 +57,7 @@ return (
         <Box component="img" sx={{
           position: 'absolute',
           left: 0,
-          top: isDesktop ? '1800px' : '200px',
+          top: isDesktop ? '1600px' : '200px',
           objectFit: 'cover',
           zIndex: 1, // Send it behind the content
           width: isTabletOrLarger ? '850px' : '450px',
