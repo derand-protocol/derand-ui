@@ -3,10 +3,10 @@ import { Box, TextField, FormControl, InputLabel, Select, MenuItem, Button, useT
 
 const RenderDepositFeesForm = () => {
   const [formValues, setFormValues] = useState({
-    dAppContracts: '',
+    dAppContract: '',
     executor: '',
-    amount: '',
-    blockchain: '',
+    PIONAmount: '',
+    chainId: '',
   });
 
   const theme = useTheme();
@@ -51,13 +51,13 @@ const RenderDepositFeesForm = () => {
     }}>
       {/* Form fields */}
       <TextField
-        label="dApp Contracts"
+        label="dApp Contract"
         variant="outlined"
-        value={formValues.dAppContracts}
-        onChange={handleFormChange('dAppContracts')}
+        value={formValues.dAppContract}
+        onChange={handleFormChange('dAppContract')}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
-        placeholder="dApp Contracts"
+        placeholder="dApp Contract"
       />
       <FormControl sx={formControlStyle}>
         <InputLabel shrink sx={{ color: '#E6E6E6' }}>Executor</InputLabel>
@@ -74,28 +74,23 @@ const RenderDepositFeesForm = () => {
         </Select>
       </FormControl>
       <TextField
-        label="Amount"
+        label="PION Amount"
         type="number"
         variant="outlined"
-        value={formValues.amount}
-        onChange={handleFormChange('amount')}
+        value={formValues.PIONAmount}
+        onChange={handleFormChange('PIONamount')}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
       />
-      <FormControl sx={formControlStyle}>
-        <InputLabel sx={{ color:'#E6E6E6' }} shrink>Blockchain</InputLabel>
-        <Select
-          value={formValues.blockchain}
-          label="Blockchain"
-          onChange={handleFormChange('blockchain')}
-          sx={{ color: '#E4E4E4' }}
-          MenuProps={{ PaperProps: { style: { maxHeight: '50vh' } } }}
-        >
-          <MenuItem value=""><em>None</em></MenuItem>
-          <MenuItem value={'blockchain1'}>Blockchain 1</MenuItem>
-          <MenuItem value={'blockchain2'}>Blockchain 2</MenuItem>
-        </Select>
-      </FormControl>
+      <TextField
+        label="Chain ID"
+        variant="outlined"
+        value={formValues.chainId}
+        onChange={handleFormChange('chainId')}
+        sx={textFieldStyle}
+        InputLabelProps={{ shrink: true }}
+        placeholder="Chain Id"
+      />
       <Button
         variant="contained"
         sx={{
