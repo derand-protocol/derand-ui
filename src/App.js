@@ -16,7 +16,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<MainPage />} />
-            <Route path="/dapps" element={<Main/>} />
+            <Route path="/ConnectWallet" element={<Main/>} />
             {/* Add more routes as needed */}
           </Routes>
           <Footer />
