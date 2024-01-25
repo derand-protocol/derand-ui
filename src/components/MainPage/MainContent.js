@@ -1,9 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import ExploreIcon from '@mui/icons-material/Explore';
 
 function MainContent() {
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    navigate('/dapps');
+  };
   const theme = useTheme();
 
   // Custom media query for 768x1024 resolution
@@ -128,6 +134,7 @@ function MainContent() {
         {/* Explore dApps Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
+          onClick={handleExploreClick}
           variant="contained"
           sx={{
             width: '200px', // Set the same fixed width
