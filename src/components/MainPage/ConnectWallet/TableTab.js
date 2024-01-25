@@ -39,7 +39,7 @@ const RenderTable = () => {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ maxWidth: '100%', marginTop: 2, color: '#E6E6E6' }}>
+    <TableContainer component={Paper} sx={{ maxWidth: '100%', color: '#E6E6E6' }}>
       <Table aria-label="dApps table">
         <TableHead>
           <TableRow sx={{ backgroundColor: '#40467F', color: '#E6E6E6' }}>
