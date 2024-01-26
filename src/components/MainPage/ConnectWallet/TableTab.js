@@ -29,8 +29,8 @@ const RenderTable = () => {
                 dAppContract: item.consumer,
                 executor: item.executor,
                 pionDeposited: (item.feeBalance / 1e18).toString(),
-                fulfilledRequests: item.numberOfTxs,
                 pionUsed: (item.feeUsed / 1e18).toString(),
+                fulfilledRequests: item.numberOfTxs,
                 pionBalance: item.balance,
               }));              
               setData(transformedData);
@@ -150,9 +150,9 @@ const getChainName = (chainId, chainsData) => {
                   </IconButton>
                 </TableCell>
                 <TableCell sx={cellStyle}>{row.pionDeposited}</TableCell>
-                <TableCell sx={cellStyle}>{row.numberOfTxs}</TableCell>
-                <TableCell sx={cellStyle}>{row.feeUsed}</TableCell>
-                <TableCell sx={cellStyle}>{row.balance}</TableCell>
+                <TableCell sx={cellStyle}>{row.pionUsed}</TableCell>
+                <TableCell sx={cellStyle}>{row.fulfilledRequests}</TableCell>
+                <TableCell sx={cellStyle}>{row.pionBalance}</TableCell>
               </TableRow>
             ))
           )}
