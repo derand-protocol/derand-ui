@@ -28,10 +28,10 @@ const RenderTable = () => {
                 blockchain: getChainName(parseInt(item.chainId, 10), chainsData),
                 dAppContract: item.consumer,
                 executor: item.executor,
-                pionDeposited: (item.feeBalance / 1e18).toString(),
-                pionUsed: (item.feeUsed / 1e18).toString(),
-                fulfilledRequests: item.numberOfTxs,
-                pionBalance: item.balance,
+                pionDeposited: Math.round(item.feeBalance / 1e18).toString(),
+                pionUsed: Math.round(item.feeUsed / 1e18).toString(),
+                fulfilledRequests:Math.round(item.numberOfTxs/ 1e18).toString(),
+                pionBalance: Math.round(item.balance / 1e18).toString(),              
               }));              
               setData(transformedData);
               setLoading(false);
