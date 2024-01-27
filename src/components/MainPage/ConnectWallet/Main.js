@@ -4,7 +4,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import RenderTable from './TableTab';
 import RenderDepositFeesForm from './FormTab';
-import ConnectWallet from './ConnectWallet';
 
 
 // Styled components for custom tabs
@@ -56,7 +55,7 @@ const Main = () => {
   
     return (
         <div style={mainStyle}>
-          <Box sx={{ width: '100%',marginTop:'140px' }}>
+          <Box sx={{ width: '100%'}}>
             <CustomTabs value={value} onChange={handleChange} centered>
               <CustomTab label="dApps" />
               <CustomTab label="Deposit Fees" />
@@ -66,11 +65,6 @@ const Main = () => {
             {value === 0 && <RenderTable />}
             {value === 1 && <RenderDepositFeesForm />}
           </div>
-          <ConnectWallet 
-            handleOpenModal={handleOpenModal} 
-            open={modalOpen} 
-            handleClose={handleCloseModal} 
-          />
         </div>
       );
     };

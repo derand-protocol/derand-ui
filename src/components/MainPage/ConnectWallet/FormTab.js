@@ -18,9 +18,9 @@ const RenderDepositFeesForm = () => {
   const textFieldStyle = {
     '& .MuiOutlinedInput-root': {
       color: '#E4E4E4',
-      '& fieldset': { borderColor: '#97969B' },
-      '&:hover fieldset': { borderColor: '#97969B' },
-      '&.Mui-focused fieldset': { borderColor: '#97969B' },
+      '& fieldset': { borderColor: '#454D93' },
+      '&:hover fieldset': { borderColor: '#454D93' },
+      '&.Mui-focused fieldset': { borderColor: '#454D93' },
     },
     '& .MuiInputLabel-root': { color: '#E6E6E6' },
     width: '100%', // Responsive width
@@ -31,6 +31,7 @@ const RenderDepositFeesForm = () => {
   const formControlStyle = {
     m: 1, 
     width: '100%', // Responsive width
+    color: '#E4E4E4',
     maxWidth: '407px', // Max width for larger screens
     '& .MuiOutlinedInput-root': {
       '& fieldset': { borderColor: '#454D93' },
@@ -45,7 +46,7 @@ const RenderDepositFeesForm = () => {
       flexDirection: 'column', 
       alignItems: 'center', 
       mt: 2,
-      width: '100%', // Use full width of the container
+      width: '100%',// Use full width of the container
       padding: theme.spacing(2), // Add some padding
       boxSizing: 'border-box', // Include padding in width calculation
     }}>
@@ -66,7 +67,7 @@ const RenderDepositFeesForm = () => {
           label="Executor"
           onChange={handleFormChange('executor')}
           sx={{ color: '#E4E4E4' }}
-          MenuProps={{ PaperProps: { style: { maxHeight: '50vh' } } }}
+          MenuProps={{ PaperProps: { style: { maxHeight: '50vh' ,color: '#454D93' }} }}
         >
           <MenuItem value=""><em>None</em></MenuItem>
           <MenuItem value={'executor1'}>Executor 1</MenuItem>
@@ -75,7 +76,6 @@ const RenderDepositFeesForm = () => {
       </FormControl>
       <TextField
         label="PION Amount"
-        type="number"
         variant="outlined"
         value={formValues.PIONAmount}
         onChange={handleFormChange('PIONamount')}
