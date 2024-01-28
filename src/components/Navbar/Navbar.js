@@ -29,7 +29,10 @@ function Navbar() {
 
   const socialMediaIcons = [
     { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord'},
-    { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>, name: 'Medium' },
+    { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>,
+              name: 'Medium',
+              link:"https://medium.com/@DeRand_dev" 
+            },
     { 
       icon: <img src={TwitterIcon} alt="Twitter" 
               style={{ 

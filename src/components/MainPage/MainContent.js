@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import ExploreIcon from '@mui/icons-material/Explore';
 
 function MainContent() {
   const navigate = useNavigate();
@@ -68,9 +67,9 @@ function MainContent() {
           MozBackgroundClip: 'text',
           MozTextFillColor: 'transparent',
           }}>
-          Decentralized, chain-agnostic{" "}
+          Decentralized, Chain-Agnostic{" "}
           </Box>
-          and public good Verifiable Random number generator
+          and Public Good Verifiable Random Number Generator
         </Typography>
       {/* Subtitle */}
         <Typography
@@ -112,23 +111,29 @@ function MainContent() {
         >
         {/* Read The Docs Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Link
+          href="https://medium.com/@DeRand_dev/derand-decentralized-chain-agnostic-verifiable-random-number-generator-120828265df7"
+          underline="none"  // Optional: Remove underline
+          target="_blank" 
+        >
           <Button
-          variant="contained"
-          sx={{
-            width: '200px', // Set a fixed width
-            backgroundImage: 'linear-gradient(#403886, #332E5B)',
-            color: '#FEFEFE',
-            textTransform: 'none',
-            ':hover': {
-              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
-            }
-          }}
+            variant="contained"
+            sx={{
+              width: '200px', // Set a fixed width
+              backgroundImage: 'linear-gradient(#403886, #332E5B)',
+              color: '#FEFEFE',
+              textTransform: 'none',
+              ':hover': {
+                backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
+              }
+            }}
           >
             Read The Docs{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
           </Button>
+        </Link>
         </Grid>
 
         {/* Explore dApps Button */}

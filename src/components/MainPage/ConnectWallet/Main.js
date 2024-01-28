@@ -15,12 +15,15 @@ const CustomTabs = styled(Tabs)(({ theme }) => ({
 }));
 
 
+
 const CustomTab = styled(Tab)(({ theme }) => ({
   color: 'white', // Custom text color for all tabs
   '&.Mui-selected': {
     color: 'white',
     backgroundColor: '#444B8F', // Background color for the selected tab
+    borderRadius:'3px'
   },
+  textTransform: 'none', // Set text transform to none for lowercase labels
 }));
 
 const Main = () => {

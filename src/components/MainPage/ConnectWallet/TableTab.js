@@ -12,6 +12,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 const RenderTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [copiedContent, setCopiedContent] = useState(null);
 
   useEffect(() => {
     // Make an HTTP GET request to the API
@@ -30,9 +31,9 @@ const RenderTable = () => {
                 executor: item.executor,
                 pionDeposited: Math.round(item.feeBalance / 1e18).toString(),
                 pionUsed: Math.round(item.feeUsed / 1e18).toString(),
-                fulfilledRequests:Math.round(item.numberOfTxs/ 1e18).toString(),
-                pionBalance: Math.round(item.balance / 1e18).toString(),              
-              }));              
+                fulfilledRequests: Math.round(item.numberOfTxs / 1e18).toString(),
+                pionBalance: Math.round(item.balance / 1e18).toString(),
+              }));
               setData(transformedData);
               setLoading(false);
             } else {
@@ -43,7 +44,7 @@ const RenderTable = () => {
             setLoading(false);
           }
         };
-  
+
         fetchChainNames();
       })
       .catch((error) => {
@@ -52,45 +53,36 @@ const RenderTable = () => {
       });
   }, []);
 
-
   const cellStyle = {
     maxWidth: '200px',
     overflowX: 'auto',
     whiteSpace: 'nowrap',
-    color: '#E6E6E6', // Set text color for all cells
+    color: '#E6E6E6',
     borderBottom: 'none',
-    textAlign: 'left', // Center the text horizontally
+    textAlign: 'left',
   };
 
   const tableHeaderCellStyle = {
     backgroundColor: '#40467F',
     color: '#E4E4E4',
-    fontWeight: 'bold', // Make the text bold
-    fontSize: '16px', // Adjust the font size
+    fontWeight: 'bold',
+    fontSize: '16px',
     borderBottom: 'none',
   };
 
   const copyToClipboard = (text) => {
-    // Create a temporary input element
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
+    navigator.clipboard.writeText(text)
+      .then(() => setCopiedContent(text))
+      .catch((error) => console.error('Error copying to clipboard:', error));
 
-    // Select and copy the text in the input element
-    tempInput.select();
-    document.execCommand('copy');
-
-    // Remove the temporary input element
-    document.body.removeChild(tempInput);
+    // Reset the copied status after a short delay
+    setTimeout(() => setCopiedContent(null), 2000);
   };
 
-  // Function to get chain name based on chainId
-// Function to get chain name based on chainId
-const getChainName = (chainId, chainsData) => {
-  const chain = chainsData.find(chain => chain.chainId === chainId);
-  return chain ? chain.name : `Unknown Chain ID: ${chainId}`;
-};
-
+  const getChainName = (chainId, chainsData) => {
+    const chain = chainsData.find(chain => chain.chainId === chainId);
+    return chain ? chain.name : `Unknown Chain ID: ${chainId}`;
+  };
 
   return (
     <TableContainer component={Paper} sx={{ maxWidth: '100%', color: '#E6E6E6' }}>
@@ -100,20 +92,20 @@ const getChainName = (chainId, chainsData) => {
             <TableCell sx={tableHeaderCellStyle}>Blockchain</TableCell>
             <TableCell sx={tableHeaderCellStyle}>dApp Contract</TableCell>
             <TableCell sx={tableHeaderCellStyle}>Executor</TableCell>
-            <TableCell sx={tableHeaderCellStyle}>PION deposited</TableCell>
-            <TableCell sx={tableHeaderCellStyle}>fulfilled Requests</TableCell>
+            <TableCell sx={tableHeaderCellStyle}>PION Deposited</TableCell>
+            <TableCell sx={tableHeaderCellStyle}>Fulfilled Requests</TableCell>
             <TableCell sx={tableHeaderCellStyle}>PION Used</TableCell>
             <TableCell sx={tableHeaderCellStyle}>PION Balance</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {loading ? (
-            <TableRow>
-              <TableCell colSpan={7}>Loading data...</TableCell>
+            <TableRow sx={{ backgroundColor: '#2E304E', color: '#E6E6E6' }}>
+              <TableCell sx={cellStyle} colSpan={7}>Loading data...</TableCell>
             </TableRow>
           ) : (
-            data.map((row, index) => (
-              <TableRow key={index} sx={{ backgroundColor: index % 2 === 0 ? '#2D2D48' : '#2E304E', color: '#E6E6E6' }}>
+            data.map((row, rowIndex) => (
+              <TableRow key={rowIndex} sx={{ backgroundColor: rowIndex % 2 === 0 ? '#2D2D48' : '#2E304E', color: '#E6E6E6' }}>
                 <TableCell sx={cellStyle}>{row.blockchain}</TableCell>
                 <TableCell sx={cellStyle}>
                   {row.dAppContract.length <= 16 ? (
@@ -131,6 +123,7 @@ const getChainName = (chainId, chainsData) => {
                   >
                     <FileCopyIcon />
                   </IconButton>
+                  {copiedContent === row.dAppContract && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
                 </TableCell>
                 <TableCell sx={cellStyle}>
                   {row.executor.length <= 16 ? (
@@ -143,15 +136,16 @@ const getChainName = (chainId, chainsData) => {
                   )}
                   <IconButton
                     size="small"
-                    style={{ color: '#E4E4E4', fontSize: '24px' }}
+                    style={{ color: '#E4E4E4', fontSize: '18px' }}
                     onClick={() => copyToClipboard(row.executor)}
                   >
                     <FileCopyIcon />
                   </IconButton>
+                  {copiedContent === row.executor && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
                 </TableCell>
                 <TableCell sx={cellStyle}>{row.pionDeposited}</TableCell>
-                <TableCell sx={cellStyle}>{row.pionUsed}</TableCell>
                 <TableCell sx={cellStyle}>{row.fulfilledRequests}</TableCell>
+                <TableCell sx={cellStyle}>{row.pionUsed}</TableCell>
                 <TableCell sx={cellStyle}>{row.pionBalance}</TableCell>
               </TableRow>
             ))
