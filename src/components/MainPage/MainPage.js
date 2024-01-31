@@ -50,6 +50,7 @@ return (
               top: 200,
               objectFit: 'cover',
               zIndex: 1,
+              width:{lg:'1240px',xl:'1440px'},
             }}
             src="/backgroundTop.svg"
             alt="Background Image"/>
@@ -63,7 +64,7 @@ return (
           top: isTabletOrLarger ? 'initial' : '200px',
           objectFit: 'cover',
           zIndex: 1, // Send it behind the content
-          width: isTabletOrLarger ? '850px' : '450px',
+          width: isTabletOrLarger ? '1240px' : '450px',
         }} src={isDesktop ? "/backgroundb.svg" : "/backgroundTop.svg"} alt="Background Image" />
       </Grid>
     </Box>
