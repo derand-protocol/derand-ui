@@ -12,9 +12,9 @@ const GradientBorderBox = styled(Box)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '1px', // Thin padding to create the border effect
+  padding: '2px', // Thin padding to create the border effect
 });
-// Box for content
+
 // Box for content
 const ContentBox = styled(Box)(({ theme }) => ({
   borderRadius: '16px',
@@ -22,6 +22,8 @@ const ContentBox = styled(Box)(({ theme }) => ({
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
+  maxHeight:'200px',
+  overflowY: 'scroll',
   padding: '32px',
   [theme.breakpoints.down('sm')]: {
     padding: '24px',
@@ -33,22 +35,21 @@ const ContentBox = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   '& .title': {
-    height: '65px',
     fontSize: '1.25rem',
-    marginBottom: '16px',
+    marginBottom: '1rem', // Adjust the space between title and body based on your design
     [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem'},
+      fontSize: '1rem',
+    },
   },
   '& .body': {
     fontSize: '1rem',
     lineHeight: '24px',
     textAlign: 'justify',
-    height: '100px',
-    paddingBottom: '36px', // Add padding to the bottom
+    height:'100px',
+    paddingBottom: '36px', // Keep padding to the bottom
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.750rem',
       lineHeight: '20px',
-
     },
   }
 }));
@@ -60,8 +61,8 @@ function Features() {
       body: 'DeRand is built on top of the Muon network, so it generates random seeds off-chain in a decentralized way using Muon’s TSS network. Therefore, it can be used on any EVM or Non-EVM blockchain',
     },
     {
-      title: 'Decentralized & Censorship Resistant',
-      body: '100% decentralized and censorship-resistant, using Muon\'s TSS network to generate random numbers',
+      title: 'Easy Implementation',
+      body: 'Smart contract libraries and the protocol structure are compatible with other VRF platforms. Requires minimal code changes for developers',
     },
     {
       title: 'Cost Efficient',
@@ -72,8 +73,8 @@ function Features() {
       body: 'DeRand protocol is modular and flexible, allowing different parties to run different parts of the protocol. There is no central authority.',
     },
     {
-      title: 'Easy to use',
-      body: 'Smart contract libraries and the protocol structure are compatible with other VRF platforms. Requires minimal code changes for developers',
+      title: 'Decentralized & Censorship Resistant',
+      body: '100% decentralized and censorship-resistant, using Muon\'s TSS network to generate random numbers',
     },
     ];
     
@@ -81,18 +82,18 @@ function Features() {
       <Grid container justifyContent="center" spacing={2} alignItems="center" 
       sx={{ 
         width: '100%', // Default to full width
-        maxWidth: { md: '80%' }, // 80% width on medium devices and up
+        maxWidth: { md: '80%' ,xl:'60%'}, // 80% width on medium devices and up
         margin: '0 auto', // Center the container
         zIndex: 2 
       }}>
         {boxesContent.map((box, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
+          <Grid item xs={12} sm={6} md={4} xl={4} key={index}>
             <GradientBorderBox>
               <ContentBox>
                 <Typography variant="h6" color="#FEFEFE" gutterBottom 
-                style={{ textAlign: 'center', width: '100%' }} className="title"
+                style={{ textAlign: 'center', width: '90%' }} className="title"
                 sx={{
-                fontSize: { xs:'1rem', sm: '1.25rem' }, // Adjust font size for different screen sizes 
+                fontSize: { xs:'1rem', sm: '1rem' }, // Adjust font size for different screen sizes 
               }}>
                   {box.title}
                 </Typography>

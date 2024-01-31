@@ -1,14 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function MainContent() {
-  const navigate = useNavigate();
-
-  const handleExploreClick = () => {
-    navigate('/dapps');
-  };
   const theme = useTheme();
 
   // Custom media query for 768x1024 resolution
@@ -29,7 +23,7 @@ function MainContent() {
         zIndex: 2 
       }}
     >
-      <Grid item xs={12} md={10} lg={10} sx={{ 
+      <Grid item xs={12} md={10} lg={10} xl={8} sx={{ 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
@@ -67,9 +61,9 @@ function MainContent() {
           MozBackgroundClip: 'text',
           MozTextFillColor: 'transparent',
           }}>
-          Decentralized, Chain-Agnostic{" "}
+          Decentralized, chain-agnostic{" "}
           </Box>
-          and Public Good Verifiable Random Number Generator
+          and Verifiable Random number generator
         </Typography>
       {/* Subtitle */}
         <Typography
@@ -111,35 +105,28 @@ function MainContent() {
         >
         {/* Read The Docs Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Link
-          href="https://medium.com/@DeRand_dev/derand-decentralized-chain-agnostic-verifiable-random-number-generator-120828265df7"
-          underline="none"  // Optional: Remove underline
-          target="_blank" 
-        >
           <Button
-            variant="contained"
-            sx={{
-              width: '200px', // Set a fixed width
-              backgroundImage: 'linear-gradient(#403886, #332E5B)',
-              color: '#FEFEFE',
-              textTransform: 'none',
-              ':hover': {
-                backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
-              }
-            }}
+          variant="contained"
+          sx={{
+            width: '200px', // Set a fixed width
+            backgroundImage: 'linear-gradient(#403886, #332E5B)',
+            color: '#FEFEFE',
+            textTransform: 'none',
+            ':hover': {
+              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
+            }
+          }}
           >
-            Read The Docs{" "}
+            What is DeRand{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
           </Button>
-        </Link>
         </Grid>
 
         {/* Explore dApps Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
-          onClick={handleExploreClick}
           variant="contained"
           sx={{
             width: '200px', // Set the same fixed width
