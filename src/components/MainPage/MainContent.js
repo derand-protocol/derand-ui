@@ -1,8 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typography, Box, Grid, Button, Link, useTheme, useMediaQuery } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function MainContent() {
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    navigate('/dapps');
+  };
   const theme = useTheme();
 
   // Custom media query for 768x1024 resolution
@@ -29,7 +35,7 @@ function MainContent() {
       alignItems: 'center', 
       justifyContent: 'center', 
       mx: 'auto', // Center align the grid item
-      px: { xs: 2, sm: 4, md: 6 } // Responsive padding
+      px: { xs: 2, sm: 4, md: 6} // Responsive padding
       }}>
         <Box sx={{
         display: 'flex',
@@ -44,16 +50,15 @@ function MainContent() {
         textAlign: 'center'
         }}>
       {/* Title */}
-        <Typography
-          variant="h1"
-          sx={{
+      <Typography
+        variant="h1"
+        sx={{
           fontWeight: 600,
-          fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3rem', lg: '4rem' }, // Responsive font size
+          fontSize: {xs: '1.5rem', sm: '2.5rem', md: '3rem',lg: '4rem', },  
           color: 'white',
           display: 'inline',
-          }}
-          >
-            
+        }}
+      >    
           <Box component="span" sx={{
           background: 'linear-gradient(45deg, #B267F3, #EA68AD, #FFA279)',
           WebkitBackgroundClip: 'text',
@@ -81,12 +86,16 @@ function MainContent() {
               target="_blank"
               color="#FEFEFE"
               sx={{
+              textDecoration: 'none',
+              '&:hover': {
               textDecoration: 'underline',
+              color: '#FEFEFE',
+              }
               }}
               >
               Muon 
             </Link>{" "}
-              decentralized TSS network to provide verifiable andom numbers on any EVM and non-EVM blockchain.
+              decentralized TSS network to provide verifiable random numbers on any EVM and non-EVM blockchain.
         </Typography>
             {/* Button */}
             {/* New Grid container for buttons */}
@@ -101,28 +110,35 @@ function MainContent() {
         >
         {/* Read The Docs Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Link
+          href="https://medium.com/@DeRand_dev/derand-decentralized-chain-agnostic-verifiable-random-number-generator-120828265df7"
+          underline="none"  // Optional: Remove underline
+          target="_blank" 
+        >
           <Button
-          variant="contained"
-          sx={{
-            width: '200px', // Set a fixed width
-            backgroundImage: 'linear-gradient(#403886, #332E5B)',
-            color: '#FEFEFE',
-            textTransform: 'none',
-            ':hover': {
-              backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
-            }
-          }}
+            variant="contained"
+            sx={{
+              width: '200px', // Set a fixed width
+              backgroundImage: 'linear-gradient(#403886, #332E5B)',
+              color: '#FEFEFE',
+              textTransform: 'none',
+              ':hover': {
+                backgroundImage: 'linear-gradient(45deg, #332E5B, #403886)',
+              }
+            }}
           >
             What is DeRand{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
           </Button>
+        </Link>
         </Grid>
 
         {/* Explore dApps Button */}
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}>
         <Button
+          onClick={handleExploreClick}
           variant="contained"
           sx={{
             width: '200px', // Set the same fixed width
@@ -146,3 +162,4 @@ function MainContent() {
 }
 
 export default MainContent;
+
