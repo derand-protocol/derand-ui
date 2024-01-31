@@ -29,13 +29,13 @@ function MainContent() {
         zIndex: 2 
       }}
     >
-      <Grid item xs={12} md={10} lg={10} sx={{ 
+      <Grid item xs={12} md={10} lg={10} xl={8} sx={{ 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
       justifyContent: 'center', 
       mx: 'auto', // Center align the grid item
-      px: { xs: 2, sm: 4, md: 6 } // Responsive padding
+      px: { xs: 2, sm: 4, md: 6} // Responsive padding
       }}>
         <Box sx={{
         display: 'flex',
@@ -50,16 +50,15 @@ function MainContent() {
         textAlign: 'center'
         }}>
       {/* Title */}
-        <Typography
-          variant="h1"
-          sx={{
+      <Typography
+        variant="h1"
+        sx={{
           fontWeight: 600,
-          fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3rem', lg: '4rem' }, // Responsive font size
+          fontSize: {xs: '1.5rem', sm: '2.5rem', md: '3rem',lg: '4rem', },  
           color: 'white',
           display: 'inline',
-          }}
-          >
-            
+        }}
+      >    
           <Box component="span" sx={{
           background: 'linear-gradient(45deg, #B267F3, #EA68AD, #FFA279)',
           WebkitBackgroundClip: 'text',
@@ -69,7 +68,7 @@ function MainContent() {
           }}>
           Decentralized, Chain-Agnostic{" "}
           </Box>
-          and Public Good Verifiable Random Number Generator
+          and Verifiable Random Number Generator
         </Typography>
       {/* Subtitle */}
         <Typography
@@ -128,7 +127,7 @@ function MainContent() {
               }
             }}
           >
-            Read The Docs{" "}
+            What is DeRand{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />

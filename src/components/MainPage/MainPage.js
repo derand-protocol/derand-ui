@@ -5,6 +5,7 @@ import Editor from './Editor';
 import Features from './Features';
 
 function MainPage() {
+  const footerHeight = '40px'; 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
@@ -57,7 +58,8 @@ return (
         <Box component="img" sx={{
           position: 'absolute',
           left: 0,
-          top: isDesktop ? '1600px' : '200px',
+          bottom: isTabletOrLarger ? footerHeight : 'initial',
+          top: isTabletOrLarger ? 'initial' : '200px',
           objectFit: 'cover',
           zIndex: 1, // Send it behind the content
           width: isTabletOrLarger ? '850px' : '450px',
