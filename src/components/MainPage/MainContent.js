@@ -61,9 +61,9 @@ function MainContent() {
           MozBackgroundClip: 'text',
           MozTextFillColor: 'transparent',
           }}>
-          Decentralized, chain-agnostic{" "}
+          Decentralized, Chain-Agnostic{" "}
           </Box>
-          and Verifiable Random number generator
+          and Verifiable Random Number Generator
         </Typography>
       {/* Subtitle */}
         <Typography
@@ -81,16 +81,12 @@ function MainContent() {
               target="_blank"
               color="#FEFEFE"
               sx={{
-              textDecoration: 'none',
-              '&:hover': {
               textDecoration: 'underline',
-              color: '#FEFEFE',
-              }
               }}
               >
               Muon 
             </Link>{" "}
-              decentralized TSS network to provide verifiable random numbers on any EVM and non-EVM blockchain.
+              decentralized TSS network to provide verifiable andom numbers on any EVM and non-EVM blockchain.
         </Typography>
             {/* Button */}
             {/* New Grid container for buttons */}
