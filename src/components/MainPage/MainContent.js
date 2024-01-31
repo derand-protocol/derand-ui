@@ -86,11 +86,7 @@ function MainContent() {
               target="_blank"
               color="#FEFEFE"
               sx={{
-              textDecoration: 'none',
-              '&:hover': {
               textDecoration: 'underline',
-              color: '#FEFEFE',
-              }
               }}
               >
               Muon 
