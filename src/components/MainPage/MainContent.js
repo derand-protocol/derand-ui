@@ -118,7 +118,7 @@ function MainContent() {
           <Button
             variant="contained"
             sx={{
-              width: '200px', // Set a fixed width
+              width: '210px', // Set a fixed width
               backgroundImage: 'linear-gradient(#403886, #332E5B)',
               color: '#FEFEFE',
               textTransform: 'none',
@@ -127,7 +127,7 @@ function MainContent() {
               }
             }}
           >
-            What is DeRand{" "}
+            What is DeRand?{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
@@ -141,7 +141,7 @@ function MainContent() {
           onClick={handleExploreClick}
           variant="contained"
           sx={{
-            width: '200px', // Set the same fixed width
+            width: '210px', // Set the same fixed width
             backgroundImage: 'linear-gradient(#403886, #332E5B)',
             color: '#FEFEFE',
             textTransform: 'none',

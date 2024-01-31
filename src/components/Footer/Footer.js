@@ -22,7 +22,7 @@ function Footer() {
       </Box>
 
       {/* Right side - Text Links */}
-      <Box sx={{ display: 'flex', alignItems: 'center', marginRight:'30px', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'left', sm:'left' }}}>
+      {/* <Box sx={{ display: 'flex', alignItems: 'center', marginRight:'30px', flexDirection: { xs: 'column', sm: 'row' }, alignItems: { xs: 'left', sm:'left' }}}>
         <Link href="#" color="inherit" sx={{ marginRight: 2 }}>
           <Typography variant="body2">Privacy Policy</Typography>
         </Link>
@@ -32,7 +32,7 @@ function Footer() {
         <Link href="#" color="inherit">
           <Typography variant="body2">Terms & Conditions</Typography>
         </Link>
-      </Box>
+      </Box> */}
     </Box>
   );
 }

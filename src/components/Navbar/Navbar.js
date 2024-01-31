@@ -14,6 +14,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import TwitterIcon from '../../Icons/twitter.svg';
 import DiscordIcon from '../../Icons/discord.svg';
 import MediumIcon from '../../Icons/medium.svg'; 
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -65,9 +66,12 @@ function Navbar() {
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px',paddingLeft:'30px',padding:'20px' }} />
-          </Box>
+        <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+          <Link to="/">
+            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px', paddingLeft: '30px', padding: '20px' }} />
+          </Link>
+        </Box>
+
 
           {isMobile ? (
             <>
@@ -94,23 +98,22 @@ function Navbar() {
             </>
           ) : (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-  {socialMediaIcons.map((item, index) => (
-    <Tooltip title={item.name} key={index}>
-      {item.link ? (
-        <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-          <IconButton color="inherit" sx={{ mx: 1 }}>
-            {item.icon}
-          </IconButton>
-        </a>
-      ) : (
-        <IconButton color="inherit" sx={{ mx: 1 }}>
-          {item.icon}
-        </IconButton>
-      )}
-    </Tooltip>
-  ))}
-</Box>
-
+              {socialMediaIcons.map((item, index) => (
+                <Tooltip title={item.name} key={index}>
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                      <IconButton color="inherit" sx={{ mx: 1 }}>
+                        {item.icon}
+                      </IconButton>
+                    </a>
+                  ) : (
+                    <IconButton color="inherit" sx={{ mx: 1 }}>
+                      {item.icon}
+                    </IconButton>
+                  )}
+                </Tooltip>
+              ))}
+            </Box>
           )}
         </Toolbar>
       </Container>
