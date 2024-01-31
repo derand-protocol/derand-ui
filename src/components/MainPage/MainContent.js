@@ -66,7 +66,7 @@ function MainContent() {
           MozBackgroundClip: 'text',
           MozTextFillColor: 'transparent',
           }}>
-          Decentralized, Chain-Agnostic{" "}
+          Decentralized, Chain-agnostic{" "}
           </Box>
           and Verifiable Random Number Generator
         </Typography>
