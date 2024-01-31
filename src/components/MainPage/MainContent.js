@@ -127,7 +127,7 @@ function MainContent() {
               }
             }}
           >
-            What is DeRand?{" "}
+            What is DeRand{" "}
             <KeyboardArrowRightIcon fontSize="small" style={{ color: '#8885AA', marginRight: '-10px' }} />
             <KeyboardArrowRightIcon fontSize="medium" style={{ color: '#C3C1D4', marginRight: '-15px' }} />
             <KeyboardArrowRightIcon fontSize="large" style={{ color: 'white' }} />
