@@ -26,7 +26,6 @@ const RenderDepositFeesForm = () => {
   const { isConnected } = useAccount();
 
   function ConnectWallet() {
-    // if (isConnected) return <Account />;
     if (!isConnected) {
       return <WalletOptions />;
     }

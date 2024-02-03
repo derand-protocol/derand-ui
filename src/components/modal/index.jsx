@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 const Modal = ({ title, setShowModal, children }) => {
   return (
-    <div className="modal-wrapper">
+    <div className="modal-wrapper" onClick={(_e) => setShowModal(false)}>
       <div className="modal-content">
         <div className="modal-title">
           <div>{title}</div>
