@@ -50,6 +50,7 @@ export function Account() {
         </Button>
       )}
       <img
+        alt="disconnect"
         className="disconnect-btn"
         src="/logout.png"
         height="20px"

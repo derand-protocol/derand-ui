@@ -7,7 +7,12 @@ const Modal = ({ title, setShowModal, children }) => {
         <div className="modal-title">
           <div>{title}</div>
           <div className="closeModalBtn" onClick={() => setShowModal(false)}>
-            <img src="/cross.png" width="16px" height="16px" />
+            <img
+              src="/cross.png"
+              width="16px"
+              height="16px"
+              alt="close modal"
+            />
           </div>
         </div>
         <div className="children-wrapper">{children}</div>
