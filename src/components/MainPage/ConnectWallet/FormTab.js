@@ -32,6 +32,8 @@ const RenderDepositFeesForm = () => {
   const [approveLoading, setApproveLoading] = useState(false);
   const [depositLoading, setDepositLoading] = useState(false);
   const [allowance, setAllowance] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const account = getAccount(config);
 
   function ConnectWallet() {
     if (!isConnected) {
@@ -45,26 +47,25 @@ const RenderDepositFeesForm = () => {
     setFormValues({ ...formValues, [prop]: event.target.value });
   };
 
-  const account = getAccount(config);
+  const handleSendTransaction = async () => {
+    setDepositLoading(true);
+    await handleDeRandFeeManager(formValues);
+    setDepositLoading(false);
+    await handleCheckApprove();
+  };
 
   const handleCheckApprove = async () => {
     const res = await checkApprove();
     setAllowance(res);
-    if (res === 0 || res < Number(formValues.PIONAmount)) {
+    if (Number(res) === 0 || Number(res) < Number(formValues.PIONAmount)) {
       setIsApproved(false);
     } else if (res >= Number(formValues.PIONAmount)) {
       setIsApproved(true);
     }
   };
 
-  useEffect(() => {
-    if (!Number(formValues.PIONAmount) || !account.address) {
-      return;
-    }
-    setIsApproved(allowance >= Number(formValues.PIONAmount));
-  }, [formValues.PIONAmount]);
-
   const handleApprove = async () => {
+    if (!Number(formValues.PIONAmount)) return;
     setApproveLoading(true);
     await approve(formValues);
     await handleCheckApprove();
@@ -76,12 +77,12 @@ const RenderDepositFeesForm = () => {
     handleCheckApprove();
   }, [account.address]);
 
-  const handleSendTransaction = async () => {
-    setDepositLoading(true);
-    await handleDeRandFeeManager(formValues);
-    setDepositLoading(false);
-    await handleCheckApprove();
-  };
+  useEffect(() => {
+    if (!Number(formValues.PIONAmount) || !account.address) {
+      return;
+    }
+    setIsApproved(allowance >= Number(formValues.PIONAmount));
+  }, [formValues.PIONAmount]);
 
   const textFieldStyle = {
     "& .MuiOutlinedInput-root": {
@@ -107,8 +108,6 @@ const RenderDepositFeesForm = () => {
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
   };
-
-  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (isConnected) setShowModal(false);
@@ -195,7 +194,7 @@ const RenderDepositFeesForm = () => {
         </Button>
       )}
 
-      {isConnected && !isApproved && !!Number(formValues.PIONAmount) && (
+      {isConnected && !isApproved && (
         <Button
           variant="contained"
           sx={{
@@ -215,7 +214,7 @@ const RenderDepositFeesForm = () => {
         </Button>
       )}
 
-      {isConnected && <Account />}
+      {/* {isConnected && <Account />} */}
 
       {showModal && (
         <Modal
@@ -226,7 +225,7 @@ const RenderDepositFeesForm = () => {
           <ConnectWallet />
         </Modal>
       )}
-      {isConnected && (isApproved || !formValues.PIONAmount) && (
+      {isConnected && isApproved && (
         <Button
           variant="contained"
           sx={{
