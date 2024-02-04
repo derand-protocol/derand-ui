@@ -3,11 +3,13 @@ import { useAccount, useDisconnect, useChainId, useSwitchChain } from "wagmi";
 import { Button } from "@mui/material";
 
 import { shortenAddress } from ".";
+import { config } from "./wagmi";
 
 export function Account() {
   const { address, chainId } = useAccount();
+
   const { disconnect } = useDisconnect();
-  const validChain = useChainId();
+  const validChain = useChainId({ config });
   const isRightChain = chainId === validChain;
   const { switchChain } = useSwitchChain();
   return (

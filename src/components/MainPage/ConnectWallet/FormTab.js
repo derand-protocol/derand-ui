@@ -13,8 +13,12 @@ import { Account } from "../../walletConnect/account";
 import { WalletOptions } from "../../walletConnect/wllaet-options";
 import { useAccount } from "wagmi";
 import Modal from "../../modal";
-
+import { getAccount } from "@wagmi/core";
 import "../../modal/style.css";
+import { handleDeRandFeeManager } from "../../../helper/handleDeRandFeeManagerTx";
+import { config } from "../../walletConnect/wagmi";
+import { checkApprove } from "../../../helper/checkApprove";
+import { approve } from "../../../helper/approve";
 
 const RenderDepositFeesForm = () => {
   const [formValues, setFormValues] = useState({
@@ -23,7 +27,11 @@ const RenderDepositFeesForm = () => {
     PIONAmount: "",
     chainId: "",
   });
+  const [isApproved, setIsApproved] = useState(false);
   const { isConnected } = useAccount();
+  const [approveLoading, setApproveLoading] = useState(false);
+  const [depositLoading, setDepositLoading] = useState(false);
+  const [allowance, setAllowance] = useState(0);
 
   function ConnectWallet() {
     if (!isConnected) {
@@ -35,6 +43,44 @@ const RenderDepositFeesForm = () => {
 
   const handleFormChange = (prop) => (event) => {
     setFormValues({ ...formValues, [prop]: event.target.value });
+  };
+
+  const account = getAccount(config);
+
+  const handleCheckApprove = async () => {
+    const res = await checkApprove();
+    setAllowance(res);
+    if (res === 0 || res < Number(formValues.PIONAmount)) {
+      setIsApproved(false);
+    } else if (res >= Number(formValues.PIONAmount)) {
+      setIsApproved(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!Number(formValues.PIONAmount)) {
+      return;
+    }
+    setIsApproved(allowance >= Number(formValues.PIONAmount));
+  }, [formValues.PIONAmount]);
+
+  const handleApprove = async () => {
+    setApproveLoading(true);
+    await approve(formValues);
+    await handleCheckApprove();
+    setApproveLoading(false);
+  };
+
+  useEffect(() => {
+    if (!account.address) return;
+    handleCheckApprove();
+  }, [account.address]);
+
+  const handleSendTransaction = async () => {
+    setDepositLoading(true);
+    await handleDeRandFeeManager(formValues);
+    setDepositLoading(false);
+    await handleCheckApprove();
   };
 
   const textFieldStyle = {
@@ -114,7 +160,7 @@ const RenderDepositFeesForm = () => {
         label="PION Amount"
         variant="outlined"
         value={formValues.PIONAmount}
-        onChange={handleFormChange("PIONamount")}
+        onChange={handleFormChange("PIONAmount")}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
       />
@@ -149,7 +195,27 @@ const RenderDepositFeesForm = () => {
         </Button>
       )}
 
-      {isConnected && <Account />}
+      {isConnected && !isApproved && !!Number(formValues.PIONAmount) && (
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            width: "100%",
+            maxWidth: "407px",
+            height: "50px",
+            bgcolor: "#413989",
+            "&:hover": {
+              bgcolor: "#413989",
+              boxShadow: "none",
+            },
+          }}
+          onClick={() => handleApprove()}
+        >
+          {approveLoading ? "Approving..." : "Approve"}
+        </Button>
+      )}
+
+      {/* {isConnected && <Account />} */}
 
       {showModal && (
         <Modal
@@ -159,6 +225,25 @@ const RenderDepositFeesForm = () => {
         >
           <ConnectWallet />
         </Modal>
+      )}
+      {(isApproved || !formValues.PIONAmount) && (
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            width: "100%",
+            maxWidth: "407px",
+            height: "50px",
+            bgcolor: "#413989",
+            "&:hover": {
+              bgcolor: "#413989",
+              boxShadow: "none",
+            },
+          }}
+          onClick={() => handleSendTransaction()}
+        >
+          {depositLoading ? "Deposit..." : "Deposit"}
+        </Button>
       )}
     </Box>
   );
