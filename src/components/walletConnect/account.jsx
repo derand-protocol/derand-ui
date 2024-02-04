@@ -14,7 +14,7 @@ export function Account() {
   const { switchChain } = useSwitchChain();
   return (
     <div className="account">
-      {isRightChain && address && (
+      {/* {isRightChain && address && (
         <Button
           variant="contained"
           sx={{
@@ -31,7 +31,7 @@ export function Account() {
         >
           {shortenAddress(address)}
         </Button>
-      )}
+      )} */}
       {!isRightChain && address && (
         <Button
           variant="contained"

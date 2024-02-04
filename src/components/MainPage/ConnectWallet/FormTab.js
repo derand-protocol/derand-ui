@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Account } from "../../walletConnect/account";
 import { WalletOptions } from "../../walletConnect/wllaet-options";
-import { useAccount } from "wagmi";
+import { useAccount, useChainId, useSwitchChain } from "wagmi";
 import Modal from "../../modal";
 import { getAccount } from "@wagmi/core";
 import "../../modal/style.css";
@@ -28,12 +28,16 @@ const RenderDepositFeesForm = () => {
     chainId: "",
   });
   const [isApproved, setIsApproved] = useState(false);
-  const { isConnected } = useAccount();
+  const { isConnected, chainId } = useAccount();
   const [approveLoading, setApproveLoading] = useState(false);
   const [depositLoading, setDepositLoading] = useState(false);
   const [allowance, setAllowance] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const account = getAccount(config);
+  const validChain = useChainId({ config });
+  const [isRightChain, setIsRightChain] = useState(false);
+
+  const { switchChain } = useSwitchChain();
 
   function ConnectWallet() {
     if (!isConnected) {
@@ -76,6 +80,11 @@ const RenderDepositFeesForm = () => {
     if (!account.address) return;
     handleCheckApprove();
   }, [account.address]);
+
+  useEffect(() => {
+    if (!account.address) return;
+    setIsRightChain(chainId === validChain);
+  }, [chainId, validChain, account.address]);
 
   useEffect(() => {
     if (!Number(formValues.PIONAmount) || !account.address) {
@@ -194,7 +203,7 @@ const RenderDepositFeesForm = () => {
         </Button>
       )}
 
-      {isConnected && !isApproved && (
+      {isConnected && !isApproved && isRightChain && (
         <Button
           variant="contained"
           sx={{
@@ -215,6 +224,25 @@ const RenderDepositFeesForm = () => {
       )}
 
       {/* {isConnected && <Account />} */}
+      {!isRightChain && isConnected && (
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            width: "100%",
+            maxWidth: "407px",
+            height: "50px",
+            bgcolor: "#413989",
+            "&:hover": {
+              bgcolor: "#413989",
+              boxShadow: "none",
+            },
+          }}
+          onClick={() => switchChain({ chainId: validChain })}
+        >
+          Switch Network
+        </Button>
+      )}
 
       {showModal && (
         <Modal
@@ -225,7 +253,7 @@ const RenderDepositFeesForm = () => {
           <ConnectWallet />
         </Modal>
       )}
-      {isConnected && isApproved && (
+      {isConnected && isApproved && isRightChain && (
         <Button
           variant="contained"
           sx={{
