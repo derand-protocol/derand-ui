@@ -58,7 +58,7 @@ const RenderDepositFeesForm = () => {
   };
 
   useEffect(() => {
-    if (!Number(formValues.PIONAmount)) {
+    if (!Number(formValues.PIONAmount) || !account.address) {
       return;
     }
     setIsApproved(allowance >= Number(formValues.PIONAmount));
@@ -215,7 +215,7 @@ const RenderDepositFeesForm = () => {
         </Button>
       )}
 
-      {/* {isConnected && <Account />} */}
+      {isConnected && <Account />}
 
       {showModal && (
         <Modal
@@ -226,7 +226,7 @@ const RenderDepositFeesForm = () => {
           <ConnectWallet />
         </Modal>
       )}
-      {(isApproved || !formValues.PIONAmount) && (
+      {isConnected && (isApproved || !formValues.PIONAmount) && (
         <Button
           variant="contained"
           sx={{
