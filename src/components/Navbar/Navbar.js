@@ -29,40 +29,28 @@ function Navbar() {
   };
 
   const socialMediaIcons = [
-    { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord'},
-    { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>,
-              name: 'Medium',
-              link:"https://medium.com/@DeRand_dev" 
-            },
-    { 
-      icon: <img src={TwitterIcon} alt="Twitter" 
+    { icon:  <img src={DiscordIcon} alt="Discord" width={24} height={24}/>, name: 'Discord', link:"https://discord.gg/EwEXrN7N" },
+    { icon: <img src={MediumIcon} alt="Medium" width={24} height={24}/>, name: 'Medium',link:"https://medium.com/@DeRand_dev" },
+    { icon: <img src={TwitterIcon} alt="Twitter" 
               style={{ 
                 width: 24, 
                 height: 24, 
                 backgroundColor: isMobile ? 'black' : 'transparent',
                 borderRadius:'20px',
               }} 
-      />,
-      name: 'Twitter',
-      link: "https://twitter.com/DeRand_dev"
-    },
+      />, name: 'Twitter',link: "https://twitter.com/DeRand_dev"},
     
-    { 
-      icon: <GitHubIcon style={{ width: 24, height: 24 }} />, 
-      name: 'GitHub',
-      link: "https://github.com/derand-protocol/"
-    },
-    // ... other icons
+    { icon: <GitHubIcon style={{ width: 24, height: 24 }} />,  name: 'GitHub',link: "https://github.com/derand-protocol/"},
   ];
 
   return (
     <AppBar position="fixed" sx={{ 
       background: 'rgba(28, 27, 35, .98)', 
       boxShadow: 'none', 
-      left: 0, // Add this line
-      right: 0, // And this line
-      width: '100vw', // Make sure it spans the entire viewport width
-      overflowX: 'hidden', // Prevent horizontal scrolling
+      left: 0, 
+      right: 0, 
+      width: '100vw', 
+      overflowX: 'hidden',
       zIndex:26,
     }}>
       <Container maxWidth="xl">
