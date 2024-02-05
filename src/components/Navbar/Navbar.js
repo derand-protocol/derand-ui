@@ -62,7 +62,8 @@ function Navbar() {
       left: 0, // Add this line
       right: 0, // And this line
       width: '100vw', // Make sure it spans the entire viewport width
-      overflowX: 'hidden' // Prevent horizontal scrolling
+      overflowX: 'hidden', // Prevent horizontal scrolling
+      zIndex:26,
     }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
