@@ -9,16 +9,14 @@ import {
   Button,
   useTheme,
 } from "@mui/material";
-import { Account } from "../../walletConnect/account";
-import { WalletOptions } from "../../walletConnect/wllaet-options";
-import { useAccount, useChainId, useSwitchChain } from "wagmi";
-import Modal from "../../modal";
+import { useAccount, useChainId, useSwitchChain, useDisconnect } from "wagmi";
 import { getAccount } from "@wagmi/core";
 import "../../modal/style.css";
 import { handleDeRandFeeManager } from "../../../helper/handleDeRandFeeManagerTx";
 import { config } from "../../walletConnect/wagmi";
 import { checkApprove } from "../../../helper/checkApprove";
 import { approve } from "../../../helper/approve";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 const RenderDepositFeesForm = () => {
   const [formValues, setFormValues] = useState({
@@ -28,23 +26,16 @@ const RenderDepositFeesForm = () => {
     chainId: "",
   });
   const [isApproved, setIsApproved] = useState(false);
-  const { isConnected, chainId } = useAccount();
+  const { isConnected, chainId, address } = useAccount();
   const [approveLoading, setApproveLoading] = useState(false);
   const [depositLoading, setDepositLoading] = useState(false);
   const [allowance, setAllowance] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const account = getAccount(config);
   const validChain = useChainId({ config });
   const [isRightChain, setIsRightChain] = useState(false);
-
+  const { open } = useWeb3Modal();
   const { switchChain } = useSwitchChain();
-
-  function ConnectWallet() {
-    if (!isConnected) {
-      return <WalletOptions />;
-    }
-  }
-
+  const { disconnect } = useDisconnect();
   const theme = useTheme();
 
   const handleFormChange = (prop) => (event) => {
@@ -117,10 +108,6 @@ const RenderDepositFeesForm = () => {
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
   };
-
-  useEffect(() => {
-    if (isConnected) setShowModal(false);
-  }, [isConnected]);
 
   return (
     <Box
@@ -195,9 +182,7 @@ const RenderDepositFeesForm = () => {
               boxShadow: "none",
             },
           }}
-          onClick={() => {
-            setShowModal(true);
-          }}
+          onClick={() => open()}
         >
           Connect Wallet
         </Button>
@@ -220,10 +205,17 @@ const RenderDepositFeesForm = () => {
           onClick={() => handleApprove()}
         >
           {approveLoading ? "Approving..." : "Approve"}
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
         </Button>
       )}
 
-      {/* {isConnected && <Account />} */}
       {!isRightChain && isConnected && (
         <Button
           variant="contained"
@@ -241,23 +233,23 @@ const RenderDepositFeesForm = () => {
           onClick={() => switchChain({ chainId: validChain })}
         >
           Switch Network
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
         </Button>
       )}
 
-      {showModal && (
-        <Modal
-          title={"connect wallet"}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        >
-          <ConnectWallet />
-        </Modal>
-      )}
       {isConnected && isApproved && isRightChain && (
         <Button
           variant="contained"
           sx={{
             mt: 2,
+            position: "relative",
             width: "100%",
             maxWidth: "407px",
             height: "50px",
@@ -270,6 +262,14 @@ const RenderDepositFeesForm = () => {
           onClick={() => handleSendTransaction()}
         >
           {depositLoading ? "Deposit..." : "Deposit"}
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
         </Button>
       )}
     </Box>
