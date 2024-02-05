@@ -36,6 +36,7 @@ const RenderDepositFeesForm = () => {
   const { open } = useWeb3Modal();
   const { switchChain } = useSwitchChain();
   const { disconnect } = useDisconnect();
+
   const theme = useTheme();
 
   const handleFormChange = (prop) => (event) => {
