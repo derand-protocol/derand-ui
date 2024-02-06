@@ -48,8 +48,8 @@ const RenderDepositFeesForm = () => {
   const theme = useTheme();
 
   const validatePIONAmount = (value) => {
-    const regex = /^[0-9]+(\.[0-9]+)?$/;
-    return regex.test(value);
+    const number = parseFloat(value);
+    return /^[0-9]+(\.[0-9]+)?$/.test(value) && number > 0;
   };
 
   const handleFormChange = (prop) => (event) => {
@@ -87,19 +87,10 @@ const RenderDepositFeesForm = () => {
       setIsApproved(true);
     }
   };
-  const handleWalletConnectAttempt = () => {
-    if (!isFormValid) {
-      let message =
-        "Please ensure all required fields are filled out correctly.";
-      setSnackbarMessage(message);
-      setSnackbarOpen(true);
-    } else {
-      open();
-    }
-  };
+
   const validateForm = () => {
     const isValidDAppContract = isAddress(formValues.dAppContract);
-    const isValidPIONAmount = /^[0-9]+(\.[0-9]+)?$/.test(formValues.PIONAmount);
+    const isValidPIONAmount = validatePIONAmount(formValues.PIONAmount);
     const isValidChainId = /^[1-9]\d*$/.test(formValues.chainId);
     const isValidExecutor = formValues.executor.length > 0;
 
@@ -256,12 +247,8 @@ const RenderDepositFeesForm = () => {
               bgcolor: "#413989",
               boxShadow: "none",
             },
-            "&.Mui-disabled": {
-              color: "grey",
-              bgcolor: "#5A4FAF",
-            },
           }}
-          onClick={handleWalletConnectAttempt}
+          onClick={() => open()}
         >
           Connect Wallet
         </Button>
@@ -337,8 +324,16 @@ const RenderDepositFeesForm = () => {
               bgcolor: "#413989",
               boxShadow: "none",
             },
+            "&.Mui-disabled": {
+              bgcolor: "rgba(65,57,137,0.5)",
+            },
           }}
           onClick={() => handleSendTransaction()}
+          disabled={
+            !isFormValid ||
+            depositLoading ||
+            !validatePIONAmount(formValues.PIONAmount)
+          }
         >
           {depositLoading ? "Deposit..." : "Deposit"}
           <img
@@ -347,7 +342,10 @@ const RenderDepositFeesForm = () => {
             src="/logout.png"
             height="20px"
             width="20px"
-            onClick={() => disconnect()}
+            onClick={(e) => {
+              e.stopPropagation();
+              disconnect();
+            }}
           />
         </Button>
       )}
