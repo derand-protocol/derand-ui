@@ -158,7 +158,6 @@ const RenderDepositFeesForm = () => {
         InputLabelProps={{ shrink: true }}
         placeholder="dApp Contract"
       />
-
       <FormControl sx={formControlStyle}>
         <InputLabel shrink sx={{ color: "#E6E6E6" }}>
           Executor
@@ -210,10 +209,9 @@ const RenderDepositFeesForm = () => {
             bgcolor: "#413989",
             boxShadow: "none",
           },
-          color: isFormValid ? '#FEFEFE' : 'grey',
           "&.Mui-disabled": {
             color: 'grey', 
-            bgcolor: "#413989", 
+            bgcolor: "#5A4FAF", 
           },
         }}
         onClick={() => open()}
