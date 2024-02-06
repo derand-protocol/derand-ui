@@ -25,6 +25,7 @@ const RenderDepositFeesForm = () => {
     PIONAmount: "",
     chainId: "",
   });
+  const [isFormValid, setIsFormValid] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const { isConnected, chainId, address } = useAccount();
   const [approveLoading, setApproveLoading] = useState(false);
@@ -62,12 +63,26 @@ const RenderDepositFeesForm = () => {
   };
 
   const handleApprove = async () => {
-    if (!Number(formValues.PIONAmount)) return;
+    const isValidDAppContract = /^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract);
+    const isValidPIONAmount = !isNaN(formValues.PIONAmount) && Number(formValues.PIONAmount) > 0;
+    const isValidChainId = /^[1-9]\d*$/.test(formValues.chainId);
+    const isValid = isValidDAppContract && isValidPIONAmount && isValidChainId && isFormValid;
+  
+    if (!isValid) {
+      alert("Please ensure all form fields are correctly filled.");
+      return; 
+    }
     setApproveLoading(true);
-    await approve(formValues);
-    await handleCheckApprove();
-    setApproveLoading(false);
+    try {
+      await approve(formValues);
+      await handleCheckApprove(); 
+    } catch (error) {
+      console.error("Approval failed:", error);
+    } finally {
+      setApproveLoading(false);
+    }
   };
+  
 
   useEffect(() => {
     if (!account.address) return;
@@ -80,12 +95,20 @@ const RenderDepositFeesForm = () => {
   }, [chainId, validChain, account.address]);
 
   useEffect(() => {
-    if (!Number(formValues.PIONAmount) || !account.address) {
-      return;
-    }
-    setIsApproved(allowance >= Number(formValues.PIONAmount));
-  }, [formValues.PIONAmount]);
+    const validateForm = () => {
+      const { dAppContract, PIONAmount, chainId } = formValues;
+      const isValidDAppContract = /^0x[a-fA-F0-9]{40}$/.test(dAppContract);
+      const isValidPIONAmount = !isNaN(PIONAmount) && Number(PIONAmount) > 0;
+      const isValidChainId = /^[1-9]\d*$/.test(chainId);
+      const isValidExecutor = formValues.executor.length > 0; 
+  
+      const isValid = isValidDAppContract && isValidPIONAmount && isValidChainId && isValidExecutor;
+      setIsFormValid(isValid);
 
+    };
+    validateForm();
+  }, [formValues]);
+  
   const textFieldStyle = {
     "& .MuiOutlinedInput-root": {
       color: "#E4E4E4",
@@ -129,10 +152,13 @@ const RenderDepositFeesForm = () => {
         variant="outlined"
         value={formValues.dAppContract}
         onChange={handleFormChange("dAppContract")}
+        error={formValues.dAppContract && !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract)}
+        helperText={formValues.dAppContract && !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract) ? "Invalid dApp Contract format." : ""}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
         placeholder="dApp Contract"
       />
+
       <FormControl sx={formControlStyle}>
         <InputLabel shrink sx={{ color: "#E6E6E6" }}>
           Executor
@@ -173,22 +199,28 @@ const RenderDepositFeesForm = () => {
       />
       {!isConnected && (
         <Button
-          variant="contained"
-          sx={{
-            mt: 2,
-            width: "100%",
-            maxWidth: "407px",
-            height: "50px",
+        variant="contained"
+        sx={{
+          mt: 2,
+          width: "100%",
+          maxWidth: "407px",
+          height: "50px",
+          bgcolor: "#413989",
+          "&:hover": {
             bgcolor: "#413989",
-            "&:hover": {
-              bgcolor: "#413989",
-              boxShadow: "none",
-            },
-          }}
-          onClick={() => open()}
-        >
-          Connect Wallet
-        </Button>
+            boxShadow: "none",
+          },
+          color: isFormValid ? '#FEFEFE' : 'grey',
+          "&.Mui-disabled": {
+            color: 'grey', 
+            bgcolor: "#413989", 
+          },
+        }}
+        onClick={() => open()}
+        disabled={!isFormValid}
+      >
+        Connect Wallet
+      </Button>      
       )}
 
       {isConnected && !isApproved && isRightChain && (
