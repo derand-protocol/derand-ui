@@ -12,7 +12,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 const RenderTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [copiedContent, setCopiedContent] = useState(null);
+  const [copiedContents, setCopiedContents] = useState([]);
 
   useEffect(() => {
     fetch("https://dapps-api.derand.dev/api/consumers-list?page=1")
@@ -69,13 +69,20 @@ const RenderTable = () => {
     borderBottom: 'none',
   };
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text, rowIndex) => {
     navigator.clipboard.writeText(text)
-      .then(() => setCopiedContent(text))
+      .then(() => {
+        const newCopiedContents = [...copiedContents];
+        newCopiedContents[rowIndex] = text; 
+        setCopiedContents(newCopiedContents);
+      })
       .catch((error) => console.error('Error copying to clipboard:', error));
 
-    // Reset the copied status after a short delay
-    setTimeout(() => setCopiedContent(null), 2000);
+    setTimeout(() => {
+      const newCopiedContents = [...copiedContents];
+      newCopiedContents[rowIndex] = null; 
+      setCopiedContents(newCopiedContents);
+    }, 800);
   };
 
   const getChainName = (chainId, chainsData) => {
@@ -118,11 +125,11 @@ const RenderTable = () => {
                   <IconButton
                     size="small"
                     style={{ color: '#E4E4E4', fontSize: '18px' }}
-                    onClick={() => copyToClipboard(row.dAppContract)}
+                    onClick={() => copyToClipboard(row.dAppContract, rowIndex)}
                   >
                     <FileCopyIcon />
                   </IconButton>
-                  {copiedContent === row.dAppContract && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
+                  {copiedContents[rowIndex] === row.dAppContract && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
                 </TableCell>
                 <TableCell sx={cellStyle}>
                   {row.executor.length <= 16 ? (
@@ -136,11 +143,11 @@ const RenderTable = () => {
                   <IconButton
                     size="small"
                     style={{ color: '#E4E4E4', fontSize: '18px' }}
-                    onClick={() => copyToClipboard(row.executor)}
+                    onClick={() => copyToClipboard(row.executor, rowIndex)}
                   >
                     <FileCopyIcon />
                   </IconButton>
-                  {copiedContent === row.executor && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
+                  {copiedContents[rowIndex] === row.executor && <span style={{ marginLeft: '5px', fontSize: '12px', color: 'green' }}>Copied!</span>}
                 </TableCell>
                 <TableCell sx={cellStyle}>{row.pionDeposited}</TableCell>
                 <TableCell sx={cellStyle}>{row.fulfilledRequests}</TableCell>

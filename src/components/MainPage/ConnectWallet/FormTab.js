@@ -8,6 +8,8 @@ import {
   MenuItem,
   Button,
   useTheme,
+  Snackbar,
+  Alert, 
 } from "@mui/material";
 import { useAccount, useChainId, useSwitchChain, useDisconnect } from "wagmi";
 import { getAccount } from "@wagmi/core";
@@ -17,6 +19,7 @@ import { config } from "../../walletConnect/wagmi";
 import { checkApprove } from "../../../helper/checkApprove";
 import { approve } from "../../../helper/approve";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
+import { isAddress } from "viem";
 
 const RenderDepositFeesForm = () => {
   const [formValues, setFormValues] = useState({
@@ -25,6 +28,10 @@ const RenderDepositFeesForm = () => {
     PIONAmount: "",
     chainId: "",
   });
+  const [pionAmountError, setPionAmountError] = useState("");
+  const [chainIdError, setChainIdError] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [isApproved, setIsApproved] = useState(false);
   const { isConnected, chainId, address } = useAccount();
@@ -40,9 +47,28 @@ const RenderDepositFeesForm = () => {
 
   const theme = useTheme();
 
-  
+  const validatePIONAmount = (value) => {
+    const regex = /^[0-9]+(\.[0-9]+)?$/;
+    return regex.test(value);
+  };
+
   const handleFormChange = (prop) => (event) => {
-    setFormValues({ ...formValues, [prop]: event.target.value });
+    const { value } = event.target;
+    if (prop === "PIONAmount") {
+      if (validatePIONAmount(value) || value === "") {
+        setPionAmountError("");
+      } else {
+        setPionAmountError("Please enter a valid number (round or decimal).");
+      }
+    } else if (prop === "chainId") {
+      if (/^[1-9]\d*$/.test(value) || value === "") {
+        setChainIdError("");
+      } else {
+        setChainIdError("Chain ID must be a integer.");
+      }
+    }
+
+    setFormValues({ ...formValues, [prop]: value });
   };
 
   const handleSendTransaction = async () => {
@@ -61,52 +87,51 @@ const RenderDepositFeesForm = () => {
       setIsApproved(true);
     }
   };
+  const handleWalletConnectAttempt = () => {
+    if (!isFormValid) {
+      let message = "Please ensure all required fields are filled out correctly.";
+      setSnackbarMessage(message);
+      setSnackbarOpen(true);
+    } else {
+      open(); 
+    }
+  };  
+  const validateForm = () => {
+    const isValidDAppContract = isAddress(formValues.dAppContract);
+    const isValidPIONAmount = /^[0-9]+(\.[0-9]+)?$/.test(formValues.PIONAmount);
+    const isValidChainId = /^[1-9]\d*$/.test(formValues.chainId);
+    const isValidExecutor = formValues.executor.length > 0;
+  
+    return isValidDAppContract && isValidPIONAmount && isValidChainId && isValidExecutor;
+  };
+  
 
   const handleApprove = async () => {
-    const isValidDAppContract = /^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract);
-    const isValidPIONAmount = !isNaN(formValues.PIONAmount) && Number(formValues.PIONAmount) > 0;
-    const isValidChainId = /^[1-9]\d*$/.test(formValues.chainId);
-    const isValid = isValidDAppContract && isValidPIONAmount && isValidChainId && isFormValid;
-  
+    const isValid = validateForm() && isFormValid; 
+    
     if (!isValid) {
       alert("Please ensure all form fields are correctly filled.");
-      return; 
+      return;
     }
     setApproveLoading(true);
     try {
       await approve(formValues);
-      await handleCheckApprove(); 
+      await handleCheckApprove();
     } catch (error) {
       console.error("Approval failed:", error);
     } finally {
       setApproveLoading(false);
     }
   };
-  
 
   useEffect(() => {
     if (!account.address) return;
     handleCheckApprove();
-  }, [account.address]);
-
-  useEffect(() => {
-    if (!account.address) return;
     setIsRightChain(chainId === validChain);
-  }, [chainId, validChain, account.address]);
+  }, [account.address, chainId, validChain]);
 
   useEffect(() => {
-    const validateForm = () => {
-      const { dAppContract, PIONAmount, chainId } = formValues;
-      const isValidDAppContract = /^0x[a-fA-F0-9]{40}$/.test(dAppContract);
-      const isValidPIONAmount = !isNaN(PIONAmount) && Number(PIONAmount) > 0;
-      const isValidChainId = /^[1-9]\d*$/.test(chainId);
-      const isValidExecutor = formValues.executor.length > 0; 
-  
-      const isValid = isValidDAppContract && isValidPIONAmount && isValidChainId && isValidExecutor;
-      setIsFormValid(isValid);
-
-    };
-    validateForm();
+    setIsFormValid(validateForm());
   }, [formValues]);
   
   const textFieldStyle = {
@@ -184,6 +209,8 @@ const RenderDepositFeesForm = () => {
         variant="outlined"
         value={formValues.PIONAmount}
         onChange={handleFormChange("PIONAmount")}
+        error={!!pionAmountError}
+        helperText={pionAmountError}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
       />
@@ -192,6 +219,8 @@ const RenderDepositFeesForm = () => {
         variant="outlined"
         value={formValues.chainId}
         onChange={handleFormChange("chainId")}
+        error={!!chainIdError}
+        helperText={chainIdError}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
         placeholder="Chain Id"
@@ -214,11 +243,10 @@ const RenderDepositFeesForm = () => {
             bgcolor: "#5A4FAF", 
           },
         }}
-        onClick={() => open()}
-        disabled={!isFormValid}
+        onClick={handleWalletConnectAttempt}
       >
         Connect Wallet
-      </Button>      
+      </Button>
       )}
 
       {isConnected && !isApproved && isRightChain && (
@@ -305,9 +333,13 @@ const RenderDepositFeesForm = () => {
           />
         </Button>
       )}
+        <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
+        <Alert onClose={() => setSnackbarOpen(false)} severity="warning" sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
 
 export default RenderDepositFeesForm;
-
