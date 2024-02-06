@@ -9,7 +9,7 @@ import {
   Button,
   useTheme,
   Snackbar,
-  Alert, 
+  Alert,
 } from "@mui/material";
 import { useAccount, useChainId, useSwitchChain, useDisconnect } from "wagmi";
 import { getAccount } from "@wagmi/core";
@@ -89,26 +89,31 @@ const RenderDepositFeesForm = () => {
   };
   const handleWalletConnectAttempt = () => {
     if (!isFormValid) {
-      let message = "Please ensure all required fields are filled out correctly.";
+      let message =
+        "Please ensure all required fields are filled out correctly.";
       setSnackbarMessage(message);
       setSnackbarOpen(true);
     } else {
-      open(); 
+      open();
     }
-  };  
+  };
   const validateForm = () => {
     const isValidDAppContract = isAddress(formValues.dAppContract);
     const isValidPIONAmount = /^[0-9]+(\.[0-9]+)?$/.test(formValues.PIONAmount);
     const isValidChainId = /^[1-9]\d*$/.test(formValues.chainId);
     const isValidExecutor = formValues.executor.length > 0;
-  
-    return isValidDAppContract && isValidPIONAmount && isValidChainId && isValidExecutor;
+
+    return (
+      isValidDAppContract &&
+      isValidPIONAmount &&
+      isValidChainId &&
+      isValidExecutor
+    );
   };
-  
 
   const handleApprove = async () => {
-    const isValid = validateForm() && isFormValid; 
-    
+    const isValid = validateForm() && isFormValid;
+
     if (!isValid) {
       alert("Please ensure all form fields are correctly filled.");
       return;
@@ -133,7 +138,12 @@ const RenderDepositFeesForm = () => {
   useEffect(() => {
     setIsFormValid(validateForm());
   }, [formValues]);
-  
+
+  useEffect(() => {
+    if (!formValues.PIONAmount) return;
+    setIsApproved(allowance >= Number(formValues.PIONAmount));
+  }, [formValues.PIONAmount]);
+
   const textFieldStyle = {
     "& .MuiOutlinedInput-root": {
       color: "#E4E4E4",
@@ -142,23 +152,23 @@ const RenderDepositFeesForm = () => {
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
     "& .MuiInputLabel-root": { color: "#E6E6E6" },
-    width: "100%", 
-    maxWidth: "407px", 
+    width: "100%",
+    maxWidth: "407px",
     m: 1,
   };
 
   const formControlStyle = {
     m: 1,
-    width: "100%", 
+    width: "100%",
     color: "#E4E4E4",
-    maxWidth: "407px", 
+    maxWidth: "407px",
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#454D93" },
       "&:hover fieldset": { borderColor: "#454D93" },
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
   };
-  
+
   return (
     <Box
       sx={{
@@ -166,8 +176,8 @@ const RenderDepositFeesForm = () => {
         flexDirection: "column",
         alignItems: "center",
         mt: 2,
-        width: "100%", 
-        padding: theme.spacing(2), 
+        width: "100%",
+        padding: theme.spacing(2),
         boxSizing: "border-box",
       }}
     >
@@ -177,8 +187,16 @@ const RenderDepositFeesForm = () => {
         variant="outlined"
         value={formValues.dAppContract}
         onChange={handleFormChange("dAppContract")}
-        error={formValues.dAppContract && !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract)}
-        helperText={formValues.dAppContract && !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract) ? "Invalid dApp Contract format." : ""}
+        error={
+          formValues.dAppContract &&
+          !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract)
+        }
+        helperText={
+          formValues.dAppContract &&
+          !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract)
+            ? "Invalid dApp Contract format."
+            : ""
+        }
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
         placeholder="dApp Contract"
@@ -193,9 +211,9 @@ const RenderDepositFeesForm = () => {
           onChange={handleFormChange("executor")}
           sx={{
             color: "#E6E6E6",
-            '& .MuiSvgIcon-root': {
-              color: '#E4E4E4' 
-            }
+            "& .MuiSvgIcon-root": {
+              color: "#E4E4E4",
+            },
           }}
           MenuProps={{
             PaperProps: { style: { maxHeight: "50vh", color: "#454D93" } },
@@ -227,26 +245,26 @@ const RenderDepositFeesForm = () => {
       />
       {!isConnected && (
         <Button
-        variant="contained"
-        sx={{
-          mt: 2,
-          width: "100%",
-          maxWidth: "407px",
-          height: "50px",
-          bgcolor: "#413989",
-          "&:hover": {
+          variant="contained"
+          sx={{
+            mt: 2,
+            width: "100%",
+            maxWidth: "407px",
+            height: "50px",
             bgcolor: "#413989",
-            boxShadow: "none",
-          },
-          "&.Mui-disabled": {
-            color: 'grey', 
-            bgcolor: "#5A4FAF", 
-          },
-        }}
-        onClick={handleWalletConnectAttempt}
-      >
-        Connect Wallet
-      </Button>
+            "&:hover": {
+              bgcolor: "#413989",
+              boxShadow: "none",
+            },
+            "&.Mui-disabled": {
+              color: "grey",
+              bgcolor: "#5A4FAF",
+            },
+          }}
+          onClick={handleWalletConnectAttempt}
+        >
+          Connect Wallet
+        </Button>
       )}
 
       {isConnected && !isApproved && isRightChain && (
@@ -333,8 +351,16 @@ const RenderDepositFeesForm = () => {
           />
         </Button>
       )}
-        <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
-        <Alert onClose={() => setSnackbarOpen(false)} severity="warning" sx={{ width: '100%' }}>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
           {snackbarMessage}
         </Alert>
       </Snackbar>
