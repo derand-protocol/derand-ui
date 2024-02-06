@@ -15,11 +15,10 @@ const RenderTable = () => {
   const [copiedContent, setCopiedContent] = useState(null);
 
   useEffect(() => {
-    // Make an HTTP GET request to the API
     fetch("https://dapps-api.derand.dev/api/consumers-list?page=1")
       .then((response) => response.json())
       .then((apiResponse) => {
-        const apiData = apiResponse.data; // Assuming the API data is in the `data` field
+        const apiData = apiResponse.data; 
         const fetchChainNames = async () => {
           try {
             const response = await fetch('/chains.json');
@@ -30,7 +29,7 @@ const RenderTable = () => {
                 dAppContract: item.consumer,
                 executor: item.executor,
                 pionDeposited:(item.feeBalance / 1e18).toFixed(2),
-                pionUsed: (item.feeUsed / 1e18).toFixed(2), // Adjusted for two decimal places
+                pionUsed: (item.feeUsed / 1e18).toFixed(2),
                 fulfilledRequests: item.numberOfTxs.toString(),
                 pionBalance: (item.balance / 1e18).toFixed(2),
               }));                    
