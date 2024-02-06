@@ -9,40 +9,37 @@ import {
   Button,
   useTheme,
 } from "@mui/material";
-import { Account } from "../../walletConnect/account";
-import { WalletOptions } from "../../walletConnect/wllaet-options";
-import { useAccount } from "wagmi";
-import Modal from "../../modal";
+import { useAccount, useChainId, useSwitchChain, useDisconnect } from "wagmi";
 import { getAccount } from "@wagmi/core";
 import "../../modal/style.css";
 import { handleDeRandFeeManager } from "../../../helper/handleDeRandFeeManagerTx";
 import { config } from "../../walletConnect/wagmi";
 import { checkApprove } from "../../../helper/checkApprove";
 import { approve } from "../../../helper/approve";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 const RenderDepositFeesForm = () => {
   const [formValues, setFormValues] = useState({
     dAppContract: "",
-    executor: "",
+    executor: "executor1",
     PIONAmount: "",
     chainId: "",
   });
   const [isApproved, setIsApproved] = useState(false);
-  const { isConnected } = useAccount();
+  const { isConnected, chainId, address } = useAccount();
   const [approveLoading, setApproveLoading] = useState(false);
   const [depositLoading, setDepositLoading] = useState(false);
   const [allowance, setAllowance] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const account = getAccount(config);
-
-  function ConnectWallet() {
-    if (!isConnected) {
-      return <WalletOptions />;
-    }
-  }
+  const validChain = useChainId({ config });
+  const [isRightChain, setIsRightChain] = useState(false);
+  const { open } = useWeb3Modal();
+  const { switchChain } = useSwitchChain();
+  const { disconnect } = useDisconnect();
 
   const theme = useTheme();
 
+  
   const handleFormChange = (prop) => (event) => {
     setFormValues({ ...formValues, [prop]: event.target.value });
   };
@@ -78,6 +75,11 @@ const RenderDepositFeesForm = () => {
   }, [account.address]);
 
   useEffect(() => {
+    if (!account.address) return;
+    setIsRightChain(chainId === validChain);
+  }, [chainId, validChain, account.address]);
+
+  useEffect(() => {
     if (!Number(formValues.PIONAmount) || !account.address) {
       return;
     }
@@ -92,27 +94,23 @@ const RenderDepositFeesForm = () => {
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
     "& .MuiInputLabel-root": { color: "#E6E6E6" },
-    width: "100%", // Responsive width
-    maxWidth: "407px", // Max width for larger screens
+    width: "100%", 
+    maxWidth: "407px", 
     m: 1,
   };
 
   const formControlStyle = {
     m: 1,
-    width: "100%", // Responsive width
+    width: "100%", 
     color: "#E4E4E4",
-    maxWidth: "407px", // Max width for larger screens
+    maxWidth: "407px", 
     "& .MuiOutlinedInput-root": {
       "& fieldset": { borderColor: "#454D93" },
       "&:hover fieldset": { borderColor: "#454D93" },
       "&.Mui-focused fieldset": { borderColor: "#454D93" },
     },
   };
-
-  useEffect(() => {
-    if (isConnected) setShowModal(false);
-  }, [isConnected]);
-
+  
   return (
     <Box
       sx={{
@@ -120,9 +118,9 @@ const RenderDepositFeesForm = () => {
         flexDirection: "column",
         alignItems: "center",
         mt: 2,
-        width: "100%", // Use full width of the container
-        padding: theme.spacing(2), // Add some padding
-        boxSizing: "border-box", // Include padding in width calculation
+        width: "100%", 
+        padding: theme.spacing(2), 
+        boxSizing: "border-box",
       }}
     >
       {/* Form fields */}
@@ -143,16 +141,17 @@ const RenderDepositFeesForm = () => {
           value={formValues.executor}
           label="Executor"
           onChange={handleFormChange("executor")}
-          sx={{ color: "#E4E4E4" }}
+          sx={{
+            color: "#E6E6E6",
+            '& .MuiSvgIcon-root': {
+              color: '#E4E4E4' 
+            }
+          }}
           MenuProps={{
             PaperProps: { style: { maxHeight: "50vh", color: "#454D93" } },
           }}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"executor1"}>Executor 1</MenuItem>
-          <MenuItem value={"executor2"}>Executor 2</MenuItem>
+          <MenuItem value="executor1">DeRand Executor</MenuItem>
         </Select>
       </FormControl>
       <TextField
@@ -186,15 +185,13 @@ const RenderDepositFeesForm = () => {
               boxShadow: "none",
             },
           }}
-          onClick={() => {
-            setShowModal(true);
-          }}
+          onClick={() => open()}
         >
           Connect Wallet
         </Button>
       )}
 
-      {isConnected && !isApproved && (
+      {isConnected && !isApproved && isRightChain && (
         <Button
           variant="contained"
           sx={{
@@ -211,21 +208,18 @@ const RenderDepositFeesForm = () => {
           onClick={() => handleApprove()}
         >
           {approveLoading ? "Approving..." : "Approve"}
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
         </Button>
       )}
 
-      {/* {isConnected && <Account />} */}
-
-      {showModal && (
-        <Modal
-          title={"connect wallet"}
-          showModal={showModal}
-          setShowModal={setShowModal}
-        >
-          <ConnectWallet />
-        </Modal>
-      )}
-      {isConnected && isApproved && (
+      {!isRightChain && isConnected && (
         <Button
           variant="contained"
           sx={{
@@ -239,9 +233,46 @@ const RenderDepositFeesForm = () => {
               boxShadow: "none",
             },
           }}
+          onClick={() => switchChain({ chainId: validChain })}
+        >
+          Switch Network
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
+        </Button>
+      )}
+
+      {isConnected && isApproved && isRightChain && (
+        <Button
+          variant="contained"
+          sx={{
+            mt: 2,
+            position: "relative",
+            width: "100%",
+            maxWidth: "407px",
+            height: "50px",
+            bgcolor: "#413989",
+            "&:hover": {
+              bgcolor: "#413989",
+              boxShadow: "none",
+            },
+          }}
           onClick={() => handleSendTransaction()}
         >
           {depositLoading ? "Deposit..." : "Deposit"}
+          <img
+            alt="disconnect"
+            className="disconnect-btn"
+            src="/logout.png"
+            height="20px"
+            width="20px"
+            onClick={() => disconnect()}
+          />
         </Button>
       )}
     </Box>
@@ -249,3 +280,4 @@ const RenderDepositFeesForm = () => {
 };
 
 export default RenderDepositFeesForm;
+

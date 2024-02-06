@@ -29,11 +29,11 @@ const RenderTable = () => {
                 blockchain: getChainName(parseInt(item.chainId, 10), chainsData),
                 dAppContract: item.consumer,
                 executor: item.executor,
-                pionDeposited: Math.round(item.feeBalance / 1e18).toString(),
-                pionUsed: Math.round(item.feeUsed / 1e18).toString(),
-                fulfilledRequests: Math.round(item.numberOfTxs / 1e18).toString(),
-                pionBalance: Math.round(item.balance / 1e18).toString(),
-              }));
+                pionDeposited:(item.feeBalance / 1e18).toFixed(2),
+                pionUsed: (item.feeUsed / 1e18).toFixed(2), // Adjusted for two decimal places
+                fulfilledRequests: item.numberOfTxs.toString(),
+                pionBalance: (item.balance / 1e18).toFixed(2),
+              }));                    
               setData(transformedData);
               setLoading(false);
             } else {
@@ -157,3 +157,4 @@ const RenderTable = () => {
 };
 
 export default RenderTable;
+
