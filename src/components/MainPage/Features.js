@@ -23,16 +23,17 @@ const ContentBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   maxHeight: "200px",
-  overflowY: "scroll",
+  overflowY: "hidden",
   padding: "32px",
+  justifyContent: "center",
+  alignItems: "center",
   [theme.breakpoints.down("sm")]: {
     padding: "24px",
   },
   [theme.breakpoints.down("xs")]: {
     padding: "16px",
+    overflowY: "scroll",
   },
-  justifyContent: "center",
-  alignItems: "center",
   "& .title": {
     fontSize: "1.25rem",
     marginBottom: "1rem",
@@ -45,13 +46,21 @@ const ContentBox = styled(Box)(({ theme }) => ({
     lineHeight: "24px",
     textAlign: "justify",
     height: "100px",
-    paddingBottom: "36px", // Keep padding to the bottom
+    paddingBottom: "36px",
     [theme.breakpoints.down("xs")]: {
       fontSize: "0.750rem",
       lineHeight: "20px",
     },
   },
 }));
+
+// For Firefox and other browsers supporting scrollbar-width
+/*
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1; // thumb and track color
+}
+*/
 
 function Features() {
   const boxesContent = [
