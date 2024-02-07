@@ -58,7 +58,7 @@ const RenderDepositFeesForm = () => {
       if (validatePIONAmount(value) || value === "") {
         setPionAmountError("");
       } else {
-        setPionAmountError("Please enter a valid number (round or decimal).");
+        setPionAmountError("Invalid amount.");
       }
     } else if (prop === "chainId") {
       if (/^[1-9]\d*$/.test(value) || value === "") {
@@ -185,7 +185,7 @@ const RenderDepositFeesForm = () => {
         helperText={
           formValues.dAppContract &&
           !/^0x[a-fA-F0-9]{40}$/.test(formValues.dAppContract)
-            ? "Invalid dApp Contract format."
+            ? "Invalid Contract address."
             : ""
         }
         sx={textFieldStyle}
@@ -320,12 +320,17 @@ const RenderDepositFeesForm = () => {
             maxWidth: "407px",
             height: "50px",
             bgcolor: "#413989",
+            color: "#DEDEDE",
             "&:hover": {
               bgcolor: "#413989",
               boxShadow: "none",
             },
             "&.Mui-disabled": {
               bgcolor: "rgba(65,57,137,0.5)",
+              color: "#DEDEDE",
+              ".disconnect-btn": {
+                opacity: 0.5,
+              },
             },
           }}
           onClick={() => handleSendTransaction()}
