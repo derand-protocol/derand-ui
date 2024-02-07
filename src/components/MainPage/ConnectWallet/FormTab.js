@@ -191,6 +191,7 @@ const RenderDepositFeesForm = () => {
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
         placeholder="dApp Contract"
+        autoComplete="off"
       />
       <FormControl sx={formControlStyle}>
         <InputLabel shrink sx={{ color: "#E6E6E6" }}>
@@ -222,6 +223,7 @@ const RenderDepositFeesForm = () => {
         helperText={pionAmountError}
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
+        autoComplete="off"
       />
       <TextField
         label="Chain ID"
@@ -233,6 +235,7 @@ const RenderDepositFeesForm = () => {
         sx={textFieldStyle}
         InputLabelProps={{ shrink: true }}
         placeholder="Chain Id"
+        autoComplete="off"
       />
       {!isConnected && (
         <Button
