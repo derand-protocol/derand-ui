@@ -57,7 +57,7 @@ function Navbar() {
         <Toolbar disableGutters>
         <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
           <Link to="/">
-            <img src="/logo1.svg" alt="DeRand Logo" style={{ height: '40px', paddingLeft: '30px', padding: '20px' }} />
+            <img src="/logo.png" alt="DeRand Logo" style={{ height: '40px', paddingLeft: '30px', padding: '20px' }} />
           </Link>
         </Box>
 
