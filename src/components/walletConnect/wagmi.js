@@ -1,6 +1,6 @@
 import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { http, createConfig } from "wagmi";
-import { bscTestnet } from "wagmi/chains";
+import { bsc } from "wagmi/chains";
 import { walletConnect, injected, coinbaseWallet } from "wagmi/connectors";
 
 const projectId = "9ba1501155f1e72178bc1861538ba8bd";
@@ -13,14 +13,14 @@ const metadata = {
 };
 
 export const config = createConfig({
-  chains: [bscTestnet],
+  chains: [bsc],
   autoConnect: true,
   connectors: [
     walletConnect({ projectId, metadata, showQrModal: false }),
     injected({ shimDisconnect: true }),
   ],
   transports: {
-    [bscTestnet.id]: http(),
+    [bsc.id]: http(),
   },
 });
 

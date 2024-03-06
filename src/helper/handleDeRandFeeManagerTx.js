@@ -21,7 +21,7 @@ export const handleDeRandFeeManager = async (formValues) => {
       args: [
         dAppContract,
         chainId,
-        "0xb57490CDAABEDb450df33EfCdd93079A24ac5Ce5",
+        "0xa8cf36161298b8D6AE8959938391444D0294b2eA",
         parseEther(PIONAmount),
       ],
       account: account.address,
@@ -34,7 +34,7 @@ export const handleDeRandFeeManager = async (formValues) => {
       args: [
         dAppContract,
         chainId,
-        "0xb57490CDAABEDb450df33EfCdd93079A24ac5Ce5",
+        "0xa8cf36161298b8D6AE8959938391444D0294b2eA",
         parseEther(PIONAmount),
       ],
       // value: parseEther(PIONAmount),
