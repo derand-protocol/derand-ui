@@ -11,14 +11,16 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import TwitterIcon from "../../Icons/twitter.svg";
 import DiscordIcon from "../../Icons/discord.svg";
 import MediumIcon from "../../Icons/medium.svg";
-import { Link } from "react-router-dom";
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("md"));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -55,7 +57,6 @@ function Navbar() {
       name: "Twitter",
       link: "https://twitter.com/DeRand_dev",
     },
-
     {
       icon: <GitHubIcon style={{ width: 24, height: 24 }} />,
       name: "GitHub",
@@ -65,9 +66,9 @@ function Navbar() {
 
   return (
     <AppBar
-      position="fixed"
+      position="absolute"
       sx={{
-        background: "rgba(28, 27, 35, .98)",
+        background: "transparent",
         boxShadow: "none",
         left: 0,
         right: 0,
@@ -83,7 +84,11 @@ function Navbar() {
               <img
                 src="/logo.png"
                 alt="DeRand Logo"
-                style={{ height: "40px", paddingLeft: "30px", padding: "20px" }}
+                style={{
+                  height: isMobile ? "20px" : "35px",
+                  paddingLeft: isMobile ? "8px" : "45px",
+                  paddingTop: isMobile ? "0" : "20px",
+                }}
               />
             </Link>
           </Box>
@@ -122,7 +127,13 @@ function Navbar() {
               </Menu>
             </>
           ) : (
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                paddingRight: "40px",
+              }}
+            >
               {socialMediaIcons.map((item, index) => (
                 <Tooltip title={item.name} key={index}>
                   {item.link ? (
@@ -132,7 +143,7 @@ function Navbar() {
                       rel="noopener noreferrer"
                       style={{ color: "inherit", textDecoration: "none" }}
                     >
-                      <IconButton color="inherit" sx={{ mx: 1 }}>
+                      <IconButton color="inherit" sx={{ mx: "1" }}>
                         {item.icon}
                       </IconButton>
                     </a>
