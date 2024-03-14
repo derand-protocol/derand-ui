@@ -6,7 +6,7 @@ import Features from "./Features";
 import Footer from "../Footer/Footer";
 
 function MainPage() {
-  const footerHeight = "40px";
+  const footerHeight = "30px";
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up("sm"));
@@ -15,7 +15,7 @@ function MainPage() {
     <Box
       sx={{
         flexGrow: 1,
-        background: "linear-gradient(180deg,#1C1B23, #292A43, #1E1D28)",
+        background: "linear-gradient( #1c1b23, #292A43 )",
         display: "flex",
         flexDirection: "center",
         justifyContent: "center",
@@ -43,7 +43,6 @@ function MainPage() {
             display: "grid",
             justifyContent: "center",
             padding: "24px",
-            paddingBottom: "50px",
           }}
         >
           <MainContent />
@@ -74,10 +73,10 @@ function MainPage() {
             sx={{
               position: "absolute",
               right: 0,
-              top: 200,
+              top: 120,
               objectFit: "cover",
               zIndex: 1,
-              width: { lg: "1240px", xl: "1440px" },
+              width: { lg: "900px", xl: "1440px" },
             }}
             src="/backgroundTop.svg"
             alt="Background Image"
@@ -94,7 +93,7 @@ function MainPage() {
             top: isTabletOrLarger ? "initial" : "200px",
             objectFit: "cover",
             zIndex: 1, // Send it behind the content
-            width: isTabletOrLarger ? "1240px" : "450px",
+            width: isTabletOrLarger ? "900px" : "450px",
           }}
           src={isDesktop ? "/backgroundb.svg" : "/backgroundTop.svg"}
           alt="Background Image"

@@ -6,14 +6,14 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const ImageBoxWithBorder = styled(Box)({
   position: "relative",
   display: "inline-block",
-  borderRadius: "5px",
+  borderRadius: "20px",
   overflow: "hidden",
   "& img": {
     display: "block",
     width: "100%",
     height: "auto",
     maxWidth: "100%",
-    maxHeight: "80vh",
+    maxHeight: "100vh",
   },
   "&::after": {
     content: '""',
@@ -43,13 +43,17 @@ function Editor() {
         <img src="/Editor.png" alt="Descriptive Alt Text" />
       </ImageBoxWithBorder>
       {/* Box to wrap the button for styling */}
-      <Box sx={{ paddingTop: "30px" }}>
+      <Box sx={{ paddingTop: "30px", width: "fit-content", margin: "auto" }}>
         <Button
-          variant="contained"
-          color="primary"
           sx={{
-            backgroundImage: "linear-gradient(#403886, #332E5B)",
-            color: "white",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#FEFEFE",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(79, 67, 184, .8), #4f43b8)",
+            borderRadius: "10px",
+            padding: "16px 28px",
             textTransform: "none",
             "& .MuiButton-label": {
               display: "flex",

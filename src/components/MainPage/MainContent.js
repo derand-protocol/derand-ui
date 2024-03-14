@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Box,
-  Grid,
   Button,
   Link,
   useTheme,
@@ -13,188 +12,162 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 function MainContent() {
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const handleExploreClick = () => {
     navigate("/dapps");
   };
-  const theme = useTheme();
 
-  // Custom media query for 768x1024 resolution
   const isTabletResolution = useMediaQuery(
-    "(min-width:768px) and (max-width:1024px) and (orientation: portrait), (min-width:768px) and (max-width:1024px) and (orientation: landscape)"
+    theme.breakpoints.between("sm", "lg")
   );
 
-  // Apply '100vh' for small and medium screens, and 'auto' for 768x1024 resolution
-  const minHeightStyle = isTabletResolution
-    ? "auto"
-    : theme.breakpoints.up("sm") && theme.breakpoints.down("md")
-    ? "100vh"
-    : "auto";
+  const minHeightStyle = isTabletResolution ? "auto" : "100vh";
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
+    <Box
       sx={{
-        paddingTop: "100px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        paddingTop: "90px",
+        //paddingBottom: "90px",
         minHeight: minHeightStyle,
         position: "relative",
         zIndex: 2,
+        width: "100%", // Full width
+        //px: 4, // Padding left and right
       }}
     >
-      <Grid
-        item
-        xs={12}
-        md={10}
-        lg={10}
-        xl={8}
+      {/* Title */}
+      <Typography
+        variant="h1"
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          mx: "auto", // Center align the grid item
-          px: { xs: 2, sm: 4, md: 6 }, // Responsive padding
+          fontWeight: 700,
+          fontFamily: "Inter, sans-serif",
+          fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem", lg: "4rem" },
+          textAlign: "center",
+          mb: 2, // Margin bottom for spacing
         }}
       >
         <Box
+          component="span"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%", // Use 100% width for flexibility
-            fontFamily: "Inter, sans-serif",
-            lineHeight: "24px",
-            pointerEvents: "all",
-            tabSize: 4,
-            textAlign: "center",
+            color: "transparent",
+            backgroundImage: "linear-gradient(#b267f3, #ea68ad 99%, #ffa279)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
           }}
         >
-          {/* Title */}
-          <Typography
-            variant="h1"
+          Decentralized, Chain-
+          <Box
+            component="span"
             sx={{
-              fontWeight: 600,
-              fontSize: { xs: "1.5rem", sm: "2.5rem", md: "3rem", lg: "4rem" },
-              color: "white",
-              display: "inline",
+              backgroundImage:
+                "linear-gradient(rgba(178, 103, 243, .97), #ea68ad 56%)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              color: "transparent",
             }}
           >
-            <Box
-              component="span"
-              sx={{
-                background: "linear-gradient(45deg, #B267F3, #EA68AD, #FFA279)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                MozBackgroundClip: "text",
-                MozTextFillColor: "transparent",
-              }}
-            >
-              Decentralized, Chain-agnostic{" "}
-            </Box>
-            and Verifiable Random Number Generator
-          </Typography>
-          {/* Subtitle */}
-          <Typography
-            variant="h6"
-            sx={{
-              mt: { xs: 1, md: 2 },
-              fontWeight: "normal",
-              fontSize: {
-                xs: "0.8rem",
-                sm: "1rem",
-                md: "1.2rem",
-                lg: "1.375rem",
-              }, // Responsive font size
-              color: "#9C9CA7",
-            }}
-          >
-            DeRand leverages{" "}
-            <Link
-              href="https://www.muon.net/"
-              target="_blank"
-              color="#FEFEFE"
-              sx={{
-                textDecoration: "underline",
-              }}
-            >
-              Muon
-            </Link>{" "}
-            decentralized TSS network to provide verifiable random numbers on
-            any EVM and non-EVM blockchain.
-          </Typography>
-          {/* New Grid container for buttons */}
-          <Grid
-            container
-            spacing={2}
-            justifyContent="center"
-            sx={{
-              flexDirection: { xs: "column", md: "row" },
-              mt: { xs: 2, md: 4 },
-            }}
-          >
-            {/* Read The Docs Button */}
-            <Grid item sx={{ display: "flex", justifyContent: "center" }}>
-              <Link
-                href="https://medium.com/@DeRand_dev/derand-decentralized-chain-agnostic-verifiable-random-number-generator-120828265df7"
-                underline="none" // Optional: Remove underline
-                target="_blank"
-              >
-                <Button
-                  variant="contained"
-                  sx={{
-                    width: "210px", // Set a fixed width
-                    backgroundImage: "linear-gradient(#403886, #332E5B)",
-                    color: "#FEFEFE",
-                    textTransform: "none",
-                    ":hover": {
-                      backgroundImage:
-                        "linear-gradient(45deg, #332E5B, #403886)",
-                    },
-                  }}
-                >
-                  What is DeRand?{" "}
-                  <KeyboardArrowRightIcon
-                    fontSize="small"
-                    style={{ color: "#8885AA", marginRight: "-10px" }}
-                  />
-                  <KeyboardArrowRightIcon
-                    fontSize="medium"
-                    style={{ color: "#C3C1D4", marginRight: "-15px" }}
-                  />
-                  <KeyboardArrowRightIcon
-                    fontSize="large"
-                    style={{ color: "white" }}
-                  />
-                </Button>
-              </Link>
-            </Grid>
-
-            {/* Explore dApps Button */}
-            <Grid item sx={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                onClick={handleExploreClick}
-                variant="contained"
-                sx={{
-                  width: "210px", // Set the same fixed width
-                  backgroundImage: "linear-gradient(#403886, #332E5B)",
-                  color: "#FEFEFE",
-                  textTransform: "none",
-                  ":hover": {
-                    backgroundImage: "linear-gradient(45deg, #332E5B, #403886)",
-                  },
-                }}
-              >
-                {/* <ExploreIcon fontSize="large" style={{ color: '#FEFEFE', marginRight: '10px'}} /> */}
-                Explore dApps{" "}
-              </Button>
-            </Grid>
-          </Grid>
+            agnostic{" "}
+          </Box>
         </Box>
-      </Grid>
-    </Grid>
+
+        <Box component="span" sx={{ color: "white" }}>
+          and <br />
+          Verifiable Random Number Generator
+        </Box>
+      </Typography>
+
+      {/* Subtitle */}
+      <Typography
+        variant="subtitle1"
+        sx={{
+          fontSize: { xs: "12px", sm: "15px", md: "15px", lg: "17px" },
+          color: "white",
+          textAlign: "center",
+          width: { xs: "100%", sm: "50%" },
+          mb: 4, // 32px bottom margin
+          px: { xs: 0, sm: 2 },
+        }}
+      >
+        DeRand leverages{" "}
+        <Link
+          href="https://www.muon.net/"
+          target="_blank"
+          color="#6979F8"
+          sx={{ textDecoration: "underline" }}
+        >
+          Muon
+        </Link>{" "}
+        decentralized TSS network to provide verifiable random numbers on any
+        EVM and non-EVM blockchain.
+      </Typography>
+
+      {/* Buttons */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: "center",
+          justifyContent: "center",
+          gap: { xs: 2, md: 4 }, // Spacing between buttons
+        }}
+      >
+        {/* Read The Docs Button */}
+        <Button
+          component={Link}
+          href="https://medium.com/@DeRand_dev/derand-decentralized-chain-agnostic-verifiable-random-number-generator-120828265df7"
+          target="_blank"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#FEFEFE",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(79, 67, 184, .8), #4f43b8)",
+            borderRadius: "10px",
+            padding: "16px 28px",
+            textTransform: "none",
+          }}
+        >
+          What is DeRand?
+          <KeyboardArrowRightIcon
+            fontSize="small"
+            style={{ fillOpacity: "0.4", marginRight: "-12px" }}
+          />
+          <KeyboardArrowRightIcon
+            fontSize="medium"
+            style={{ fillOpacity: "0.7", marginRight: "-12px" }}
+          />
+          <KeyboardArrowRightIcon
+            fontSize="medium"
+            style={{ color: "#FEFEFE" }}
+          />
+        </Button>
+
+        <Button
+          onClick={handleExploreClick}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#FEFEFE",
+            backgroundImage:
+              "linear-gradient(45deg, rgba(79, 67, 184, .8), #4f43b8)",
+            borderRadius: "10px",
+            padding: "16px 28px",
+            textTransform: "none",
+          }}
+        >
+          Explore dApps
+        </Button>
+      </Box>
+    </Box>
   );
 }
 
