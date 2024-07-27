@@ -108,7 +108,7 @@ function Features() {
       {boxesContent.map((box, index) => (
         <Grid item xs={12} sm={6} md={4} xl={4} key={index}>
           <GradientBorderBox>
-            <ContentBox>
+            <ContentBox sx={{ overflowX: "hidden" }}>
               <Typography
                 variant="h6"
                 color="#FEFEFE"
@@ -124,7 +124,11 @@ function Features() {
               <Typography
                 variant="body2"
                 color="rgba(255, 255, 255, 0.60)"
-                style={{ width: "100%", textAlign: "center" }}
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  overflowX: "hidden",
+                }}
                 className="body"
               >
                 {box.body}
