@@ -3,7 +3,6 @@ import { Box, Grid, useTheme, useMediaQuery } from "@mui/material";
 import MainContent from "./MainContent";
 import Editor from "./Editor";
 import Features from "./Features";
-import Footer from "../Footer/Footer";
 
 function MainPage() {
   const footerHeight = "30px";
