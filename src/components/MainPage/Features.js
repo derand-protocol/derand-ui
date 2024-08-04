@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Box, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
-// Custom styled Box with gradient border
 const GradientBorderBox = styled(Box)({
   height: "100%",
   borderRadius: "16px",
@@ -14,7 +13,6 @@ const GradientBorderBox = styled(Box)({
   padding: "3px",
 });
 
-// Box for content
 const ContentBox = styled(Box)(({ theme }) => ({
   borderRadius: "16px",
   background: "#1F1F2B",
@@ -46,7 +44,7 @@ const ContentBox = styled(Box)(({ theme }) => ({
     lineHeight: "24px",
     textAlign: "justify",
     height: "100px",
-    padding: "32px",
+    paddingTop: "16px",
     [theme.breakpoints.down("xs")]: {
       fontSize: "0.750rem",
       lineHeight: "20px",
@@ -99,16 +97,16 @@ function Features() {
       alignItems="center"
       sx={{
         paddingTop: "80px",
-        width: "100%", // Default to full width
-        maxWidth: { md: "80%", xl: "60%" }, // 80% width on medium devices and up
-        margin: "0 auto", // Center the container
+        width: "100%",
+        maxWidth: { md: "80%", xl: "60%" },
+        margin: "0 auto",
         zIndex: 2,
       }}
     >
       {boxesContent.map((box, index) => (
         <Grid item xs={12} sm={6} md={4} xl={4} key={index}>
           <GradientBorderBox>
-            <ContentBox sx={{ overflowX: "hidden" }}>
+            <ContentBox>
               <Typography
                 variant="h6"
                 color="#FEFEFE"
@@ -116,7 +114,7 @@ function Features() {
                 style={{ textAlign: "center", width: "90%" }}
                 className="title"
                 sx={{
-                  fontSize: { xs: "1rem", sm: "1rem" }, // Adjust font size for different screen sizes
+                  fontSize: { xs: "1rem", sm: "1rem" },
                 }}
               >
                 {box.title}
@@ -127,7 +125,7 @@ function Features() {
                 style={{
                   width: "100%",
                   textAlign: "center",
-                  overflowX: "hidden",
+                  marginBottom: "20px",
                 }}
                 className="body"
               >
